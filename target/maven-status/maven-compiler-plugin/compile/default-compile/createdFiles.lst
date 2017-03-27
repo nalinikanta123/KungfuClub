@@ -1,0 +1,4 @@
+org/test/springtest/local.class
+org/test/springtest/testService.class
+org/test/springtest/RestControllers.class
+org/test/springtest/StartApp.class
