@@ -37,7 +37,9 @@ class local{
 public class RestControllers {
 	
 	@Autowired
-	private testService test;
+	private TopicService topicService;
+	
+	
 	
 	@RequestMapping("/")
 	public String home(){
@@ -45,12 +47,15 @@ public class RestControllers {
 	}
 	
 	@RequestMapping(value="/students",consumes=MediaType.APPLICATION_JSON_VALUE,method=RequestMethod.POST)
-	public void addStudent(@RequestBody local local){
+	public void addStudent(@RequestBody Topic local){
 		System.out.println("Name recieved = " +local.name);
 		System.out.println("age recieved = " +local.age);
 		System.out.println("rank recieved = " +local.rank);
 		System.out.println("year recieved = " +local.year);
 		System.out.println("belts recieved = " +local.belts	);
+		System.out.println("Calling add topic call\n");
+		topicService.addTopic(local);
+		System.out.println("Return from add topic call\n");
 	}
 	
 	@RequestMapping("/object")
@@ -71,11 +76,11 @@ public class RestControllers {
 		return obj;
 	}
 	
-	//use of service
-	@RequestMapping("/getAllInfo")
-	public int getAll(){
-		return test.getAllInfo();
-	} 
+	@RequestMapping("/object2")
+	public List<Topic> test2(){
+		return topicService.getAllTopics();
+	}
+	
 	
 	//printing input paramters
 	@RequestMapping("/test/{id}")

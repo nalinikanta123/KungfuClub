@@ -28,6 +28,11 @@ app.service("submitStudentRecord",submitStudentRecord);
 			self.local=data;
 			console.log("inside service");
 			console.log(self.local.name);
+			console.log(self.local.age);
+			console.log(self.local.rank);
+			console.log(self.local.year);
+			console.log(self.local.belts);
+			console.log("End of user input");
 			var promise1 = $http.post("http://localhost:8080/students",self.local);
 			var promise2 = promise1.then(function (response) {
 					console.log("Respone = " + response.data);

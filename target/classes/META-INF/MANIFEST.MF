@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: springtest
+Implementation-Title: MaruProject2
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: yadwindersingh
 Implementation-Vendor-Id: org.test.springtest

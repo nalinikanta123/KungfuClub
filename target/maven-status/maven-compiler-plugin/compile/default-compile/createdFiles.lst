@@ -1,4 +1,7 @@
 org/test/springtest/local.class
 org/test/springtest/testService.class
+org/test/springtest/TopicService.class
 org/test/springtest/RestControllers.class
+org/test/springtest/Topic.class
 org/test/springtest/StartApp.class
+org/test/springtest/TopicRepository.class
