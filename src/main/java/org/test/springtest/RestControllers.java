@@ -85,6 +85,7 @@ public class RestControllers {
 	//get real time data from DB for specific rank
 		@RequestMapping("/topic/{belts}")
 		public List<Topic> test3(@PathVariable String belts){
+			System.out.println("Input received = "+belts);
 			return topicService.getSpecificBelts(belts);
 		}
 	

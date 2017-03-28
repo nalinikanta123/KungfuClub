@@ -82,7 +82,6 @@
 			self.apiCall();
 		}
 	}
-
 	self.changePage=function(data){
 		self.pageTypeSearch=data;
 		if(data == false){
