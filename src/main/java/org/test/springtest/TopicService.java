@@ -30,4 +30,10 @@ public class TopicService {
 		topicRepository.delete(name);
 	}
 	
+	public List<Topic> getSpecificBelts(String belts){
+		List<Topic> topics= new ArrayList<Topic>();
+		topicRepository.findByBelts(belts).forEach(topics::add);
+		return topics;
+	}
+	
 }

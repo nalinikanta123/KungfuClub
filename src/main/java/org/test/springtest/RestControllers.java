@@ -76,10 +76,17 @@ public class RestControllers {
 		return obj;
 	}
 	
+	//get real time data from DB
 	@RequestMapping("/object2")
 	public List<Topic> test2(){
 		return topicService.getAllTopics();
 	}
+	
+	//get real time data from DB for specific rank
+		@RequestMapping("/topic/{belts}")
+		public List<Topic> test3(@PathVariable String belts){
+			return topicService.getSpecificBelts(belts);
+		}
 	
 	
 	//printing input paramters
