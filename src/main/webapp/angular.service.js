@@ -11,7 +11,7 @@ app.service("submitStudentRecord",submitStudentRecord);
 			console.log("inside service");
 			console.log(data);
 			
-			var p1= $http.get('http://localhost:8080/object');
+			var p1= $http.get('http://localhost:8080/object2');
 			var p2= p1.then(function (response){
 				console.log(response.data);
 				return response.data;
