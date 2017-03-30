@@ -29,6 +29,20 @@ public class TopicService {
 	public void deleteTopic(String name){
 		topicRepository.delete(name);
 	}
+	 
+	public List<Topic> getCustTopic(String belts){
+		List<Topic> topics= new ArrayList<Topic>();
+		topicRepository.findByCusBelts(belts).forEach(topics::add);
+		return topics;
+	}
+	
+	public List<String> getJoinName(String name){
+		List<String> topics= new ArrayList<String>();
+		topicRepository.getJoinName(name).forEach(topics::add);
+		return topics;
+	}
+	
+	
 	
 	public List<Topic> getSpecificBelts(String belts){
 		List<Topic> topics= new ArrayList<Topic>();

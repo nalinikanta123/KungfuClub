@@ -28,15 +28,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" style="color: #FFFFFF">Project name</a>
+          <a class="navbar-brand" href="#" style="color: #FFFFFF">Stephanos Kung Fu Club</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+        <!-- removing the links
           <ul class="nav navbar-nav">
             <li ><a href="#" style="color: #FFFFFF">Home</a></li>
             <li><a href="#" style="color: #FFFFFF">About</a></li>
             <li><a href="#" style="color: #FFFFFF">Contact</a></li>
           </ul>
-
+        -->
         </div><!--/.nav-collapse -->
       </div><!--/.container-fluid -->
     </nav>
@@ -51,9 +52,6 @@
           <button type="button" class="btn btn-primary"  ng-click="stud.searchCall('All')">All</button>
         </div>
         <div class="btn-group">
-          <button type="button" class="btn btn-primary" ng-click="stud.searchCall('Active')">Active</button>
-        </div >
-        <div class="btn-group">
           <button type="button" class="btn btn-primary" ng-click="stud.searchCall('Rank')">By Rank</button>
         </div>
         <div class="btn-group">
@@ -62,20 +60,24 @@
         <div class="btn-group">
           <button type="button" class="btn btn-primary" ng-click="stud.searchCall('Belts')">By Belts</button>
         </div>
-      </div>
-      <div class="col-sm-4">
-        <button type="button" class="btn btn-primary" ng-click="stud.changePage(false)" style="float: right">
-          Add Student</button>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" ng-click="stud.searchCall('Combo')" >
+            Combo</button>
+          </div >
         </div>
+        <div class="col-sm-4">
+          <button type="button" class="btn btn-primary" ng-click="stud.changePage(false)" style="float: right">
+            Add Student</button>
+          </div>
 
-      </div>
-          <!--Hidden fields-->
-          <div class="jumbotron" ng-show="stud.searchByCatgory" style="padding-top: 10px; padding-bottom: 100px;">
+        </div>
+        <!--Hidden fields-->
+        <div class="jumbotron" ng-show="stud.searchByCatgory" style="padding-top: 10px; padding-bottom: 100px;">
           <h3>Please select</h3>
-           <div class="col-sm-4">
-            <div class="form-group" ng-show="stud.isSearchByBelts">
+          <div class="col-sm-4" ng-show="stud.isSearchByBelts">
+            <div class="form-group" >
               <label for="belts">Belt:</label>
-              <select class="form-control" id="belts" ng-model="stud.studentStruct.belts" ng-change="stud.callSearchByBelt()">
+              <select class="form-control" id="belts" ng-model="stud.studentStruct.belts" ng-change="stud.callSearchByBelt()" style="width: 200px">
                 <option>White</option>
                 <option>Black</option>
                 <option>Yellow</option>
@@ -83,83 +85,137 @@
               </select> 
             </div>
           </div> 
+           <div class="col-sm-4" ng-show="stud.isSearchByRank">
+            <div class="form-group" >
+              <div class="form-group" >
+                <label for="rank">Rank:</label><br>
+                <div class="input-group">
+                  <input type="text" class="form-control" aria-describedby="basic-addon1" style="width: 200px" ng-model="stud.studentStruct.rank">
+                </div>
+              </div>
+            </div>
+          </div> 
+          <div class="col-sm-4" ng-show="stud.isSearchByYear">
+            <div class="form-group" >
+              <label for="year">Year:</label><br>
+              <div class="input-group">
+                <input type="text" class="form-control" aria-describedby="basic-addon1" style="width: 200px" ng-model="stud.studentStruct.year">
+              </div>
+            </div>
+          </div> 
         </div>
 
-      <!--  Handling if data retrieved from backend  -->
-      <div class="jumbotron">
-        <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">Search {{stud.searchType}}</span>
-          <input type="text" ng-model= "query" class="form-control" placeholder="Type Here !!!" aria-describedby="basic-addon1">
+        <!--Combo fields-->
+        <div class="jumbotron" ng-show="stud.searchByCombo" style="padding-top: 10px; padding-bottom: 100px;">
+          <h3>Please select</h3>
+          <div class="col-sm-4">
+            <div class="form-group" >
+              <label for="belts">Belt:</label>
+              <select class="form-control" id="belts" ng-model="stud.studentStruct.belts" style="width: 200px">
+                <option>White</option>
+                <option>Black</option>
+                <option>Yellow</option>
+                <option>Red</option>
+              </select> 
+            </div>
+          </div> 
+          <div class="col-sm-4">
+            <div class="form-group" >
+              <div class="form-group" >
+                <label for="rank">Rank:</label><br>
+                <div class="input-group">
+                  <input type="text" class="form-control" aria-describedby="basic-addon1" style="width: 200px" ng-model="stud.studentStruct.rank">
+                </div>
+              </div>
+            </div>
+          </div> 
+          <div class="col-sm-4">
+            <div class="form-group" >
+              <label for="year">Year:</label><br>
+              <div class="input-group">
+                <input type="text" class="form-control" aria-describedby="basic-addon1" style="width: 200px" ng-model="stud.studentStruct.year">
+              </div>
+            </div>
+          </div> 
         </div>
-        <div ng-repeat="record in stud.studentRecord | filter: query " style="margin-top: 10px;">
-          <div class="well well-sm" id="">
-            Name : {{record.name}} <br>
-            Age  : {{record.age}} <br>
-            Rank : {{record.rank}} <br>
-            Year : {{record.year}} <br>
-            Belt : {{record.belts}} <br>
+
+
+
+        <!--  Handling if data retrieved from backend  -->
+        <div class="jumbotron">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Search {{stud.searchType}}</span>
+            <input type="text" ng-model= "query" class="form-control" placeholder="Type Here !!!" aria-describedby="basic-addon1">
+          </div>
+          <div ng-repeat="record in stud.studentRecord | filter: query " style="margin-top: 10px;">
+            <div class="well well-sm" id="">
+              Name : {{record.name}} <br>
+              Age  : {{record.age}} <br>
+              Rank : {{record.rank}} <br>
+              Year : {{record.year}} <br>
+              Belt : {{record.belts}} <br>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Main components for Adding new students-->
-    <div class="searchBar" ng-hide="stud.pageTypeSearch">
-      <div class="jumbotron" style="padding-top: 10px; padding-bottom: 100px;">
-        <!-- Split button -->
-        <div class="col-sm-8">
-         <h2>Add Student</h2>
-         <p>Submit below form to add new Student</p>
-       </div>
-       <div class="col-sm-4">
-        <button type="button" class="btn btn-primary" ng-click="stud.changePage(true)" style="float: right">
-          Search</button>
+      <!-- Main components for Adding new students-->
+      <div class="searchBar" ng-hide="stud.pageTypeSearch">
+        <div class="jumbotron" style="padding-top: 10px; padding-bottom: 100px;">
+          <!-- Split button -->
+          <div class="col-sm-8">
+           <h2>Add Student</h2>
+           <p>Submit below form to add new Student</p>
+         </div>
+         <div class="col-sm-4">
+          <button type="button" class="btn btn-primary" ng-click="stud.changePage(true)" style="float: right">
+            Search</button>
+          </div>
         </div>
-      </div>
 
-      <!--  Handling if data retrieved from backend  -->
-      <div class="jumbotron">
-      <div ng-hide="stud.recordNotInserted">
-        <form>
-         <div class="form-group">
-          <label for="usr">Name:</label>
-          <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.name">
+        <!--  Handling if data retrieved from backend  -->
+        <div class="jumbotron">
+          <div ng-hide="stud.recordNotInserted">
+            <form>
+             <div class="form-group">
+              <label for="usr">Name:</label>
+              <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.name">
+            </div>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="text" class="form-control" id="age" ng-model="stud.studentStruct.age">
+            </div>
+            <div class="form-group">
+              <label for="rank">Rank:</label>
+              <select class="form-control" id="rank" ng-model="stud.studentStruct.rank">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="year">Year:</label>
+              <input type="text" class="form-control" id="year" ng-model="stud.studentStruct.year">
+            </div>
+            <div class="form-group">
+              <label for="belts">Belt:</label>
+              <select class="form-control" id="belts" ng-model="stud.studentStruct.belts">
+                <option>White</option>
+                <option>Black</option>
+                <option>Yellow</option>
+                <option>Red</option>
+              </select> 
+            </div>
+            <button class="btn btn-primary" ng-click = "stud.saveStudent()">Submit</button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="age">Age:</label>
-          <input type="text" class="form-control" id="age" ng-model="stud.studentStruct.age">
-        </div>
-        <div class="form-group">
-          <label for="rank">Rank:</label>
-          <select class="form-control" id="rank" ng-model="stud.studentStruct.rank">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="year">Year:</label>
-          <input type="text" class="form-control" id="year" ng-model="stud.studentStruct.year">
-        </div>
-        <div class="form-group">
-          <label for="belts">Belt:</label>
-          <select class="form-control" id="belts" ng-model="stud.studentStruct.belts">
-            <option>White</option>
-            <option>Black</option>
-            <option>Yellow</option>
-            <option>Red</option>
-          </select> 
-        </div>
-        <button class="btn btn-primary" ng-click = "stud.saveStudent()">Submit</button>
-      </form>
-      </div>
-      <div ng-show="stud.recordNotInserted">
-        <div class="alert alert-success" ng-show="stud.recInsertedSuccessfully">
+        <div ng-show="stud.recordNotInserted">
+          <div class="alert alert-success" ng-show="stud.recInsertedSuccessfully">
            <strong>Success!</strong> Student added successfully.
-        </div>
-        <div class="alert alert-danger" ng-hide="stud.recInsertedSuccessfully">
-            <strong>Insertion Failed!</strong> Something went wrong. Please retry later.
+         </div>
+         <div class="alert alert-danger" ng-hide="stud.recInsertedSuccessfully">
+          <strong>Insertion Failed!</strong> Something went wrong. Please retry later.
         </div>
       </div>
     </div>

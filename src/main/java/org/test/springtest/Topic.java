@@ -1,7 +1,24 @@
 package org.test.springtest;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 public class Topic {
@@ -12,16 +29,20 @@ public class Topic {
 	String rank;
 	String year;
 	String belts;
+	@OneToMany(mappedBy="topic1",fetch=FetchType.EAGER)
+	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@topicId") // V.IMP for object to JSON conversion
+	private Collection<Test> test = new ArrayList<>();
 	
 	public Topic(){
 	}
 	
-	public Topic(String name, int age, String rank, String year, String belts){
+	public Topic(String name, int age, String rank, String year, String belts ){
 		this.name=name;
 		this.age=age;
 		this.rank=rank;
 		this.year=year;
 		this.belts=belts;
+		//this.test=test;
 	}
 
 	public String getName() {
@@ -64,4 +85,12 @@ public class Topic {
 		this.belts = belts;
 	}
 
+	
+	public Collection<Test> getTest() {
+		return test;
+	}
+
+	public void setTest(Collection<Test> test) {
+		this.test = test;
+	}
 }

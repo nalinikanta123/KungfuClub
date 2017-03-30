@@ -11,6 +11,9 @@
 		self.recInsertedSuccessfully=true;
 		self.isSearchByBelts=false;  //search for belts only
 		self.searchByCatgory=false;
+		self.searchByCombo=false;
+		self.isSearchByRank=false;
+		self.isSearchByYear=false;
 
 	//varibables to send data to backend
 	self.studentStruct={
@@ -51,13 +54,19 @@
 			//unset the fields
 			self.isSearchByBelts=false;
 			self.searchByCatgory=false;
+			self.searchByCombo=false;
+			self.isSearchByRank=false;
+			self.isSearchByYear=false;
 			self.apiCall();	
 		}
-		else if(data == 'Active'){
-			self.searchType= "Active";
+		else if(data == 'Combo'){
+			self.searchType= "Combo";
 			//unset the fields
 			self.isSearchByBelts=false;
 			self.searchByCatgory=false;
+			self.isSearchByRank=false;
+			self.searchByCombo=true;
+			self.isSearchByYear=false;
 			self.apiCall();
 		}
 		else if(data == 'Rank'){
@@ -65,6 +74,9 @@
 			//unset the fields
 			self.isSearchByBelts=false;
 			self.searchByCatgory=true;
+			self.searchByCombo=false;
+			self.isSearchByRank=true;
+			self.isSearchByYear=false;
 			self.apiCall();
 		}
 		else if(data == 'Year'){
@@ -72,12 +84,18 @@
 			//unset the fields
 			self.isSearchByBelts=false;
 			self.searchByCatgory=true;
+			self.searchByCombo=false;
+			self.isSearchByRank=false;
+			self.isSearchByYear=true;
 			self.apiCall();
 		}
 		else if(data == 'Belts'){
 			self.searchType= "By Belts";
 			self.isSearchByBelts=true;
 			self.searchByCatgory=true;
+			self.isSearchByRank=false;
+			self.searchByCombo=false;
+			self.isSearchByYear=false;
 			//get all records of particular belts
 			self.apiCall();
 		}
