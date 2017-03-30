@@ -1,4 +1,4 @@
-package org.test.springtest;
+package org.maru.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;

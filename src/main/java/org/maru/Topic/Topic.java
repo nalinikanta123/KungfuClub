@@ -1,4 +1,4 @@
-package org.test.springtest;
+package org.maru.Topic;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.maru.Test.Test;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -24,14 +26,14 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Topic {
 	
 	@Id
-	String name;
-	int age;
-	String rank;
-	String year;
-	String belts;
+	public String name;
+	public int age;
+	public String rank;
+	public String year;
+	public String belts;
 	@OneToMany(mappedBy="topic1",fetch=FetchType.EAGER)
 	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@topicId") // V.IMP for object to JSON conversion
-	private Collection<Test> test = new ArrayList<>();
+	public Collection<Test> test = new ArrayList<>();
 	
 	public Topic(){
 	}

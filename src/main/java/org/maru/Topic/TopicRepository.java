@@ -1,4 +1,4 @@
-package org.test.springtest;
+package org.maru.Topic;
 
 import java.util.List;
 

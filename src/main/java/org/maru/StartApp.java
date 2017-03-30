@@ -1,4 +1,6 @@
-package org.test.springtest;
+package org.maru;
+
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

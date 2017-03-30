@@ -1,4 +1,4 @@
-package org.test.springtest;
+package org.maru.Test;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.maru.Topic.Topic;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -17,12 +19,12 @@ public class Test {
 
 	
 	@Id
-	String test_id;
-	int fee;
+	public String test_id;
+	public int fee;
 	@ManyToOne
 	@JoinColumn(name ="name")
 	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@testId")
-	private Topic topic1;
+	public Topic topic1;
 	
 	Test(){
 		

@@ -1,4 +1,4 @@
-package org.test.springtest;
+package org.maru.Test;
 
 import org.springframework.data.repository.CrudRepository;
 
