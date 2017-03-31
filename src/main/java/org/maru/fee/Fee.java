@@ -1,0 +1,66 @@
+package org.maru.fee;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.maru.Test.Test;
+import org.maru.Topic.Topic;
+import org.maru.student.Student;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@Entity
+public class Fee {
+	@Id
+	@GeneratedValue
+	int fee_num;
+	String fee_description;
+	Date fee_date;
+	int fee_value;
+	@ManyToOne
+	@JoinColumn(name ="std_num")
+	public Student studentFee;
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@feeNum")
+
+	public int getFee_num() {
+		return fee_num;
+	}
+	public void setFee_num(int fee_num) {
+		this.fee_num = fee_num;
+	}
+	public String getFee_description() {
+		return fee_description;
+	}
+	public void setFee_description(String fee_description) {
+		this.fee_description = fee_description;
+	}
+	public Date getFee_date() {
+		return fee_date;
+	}
+	public void setFee_date(Date fee_date) {
+		this.fee_date = fee_date;
+	}
+	public int getFee_value() {
+		return fee_value;
+	}
+	public void setFee_value(int fee_value) {
+		this.fee_value = fee_value;
+	}
+	public Student getStudent() {
+		return studentFee;
+	}
+	public void setStudent(Student student) {
+		this.studentFee = student;
+	}
+}

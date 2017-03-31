@@ -37,7 +37,7 @@ class local {
 }
 
 @RestController
-public class TopicControllers {
+public class TopicController {
 
 	@Autowired
 	private TopicService topicService;

@@ -53,15 +53,12 @@ public class Test {
 		this.fee = fee;
 	}
 
-
 	public Topic getTopic() {
 		return topic1;
 	}
 
 	public void setTopic(Topic topic) {
 		this.topic1 = topic;
-	}
-	
-
+	}	
 	
 }

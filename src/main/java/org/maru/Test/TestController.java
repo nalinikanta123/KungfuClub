@@ -37,7 +37,7 @@ class local {
 }
 
 @RestController
-public class TestControllers {
+public class TestController {
 
 	@Autowired
 	private TestService testService;
