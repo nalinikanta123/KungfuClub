@@ -27,4 +27,16 @@ public class FeeService {
 		feeRepository.save(fee);
 	}
 	
+	//3. get one fee record
+	public Fee getOneFee(int id){
+		return feeRepository.findOne(id);
+	}
+	
+	//4. get all fee record for a student
+	public List<Fee> getAllStudFee(int std_num){
+		List<Fee> fee = new ArrayList<Fee>();
+		feeRepository.findStudentFee(std_num).forEach(fee::add);
+		//System.out.println("obj" + list.fee_description);
+		 return fee;
+	}
 }

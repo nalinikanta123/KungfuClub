@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.maru.Test.Test;
 import org.maru.Topic.Topic;
@@ -28,6 +32,7 @@ public class Fee {
 	String fee_description;
 	Date fee_date;
 	int fee_value;
+
 	@ManyToOne
 	@JoinColumn(name ="std_num")
 	public Student studentFee;
@@ -35,6 +40,18 @@ public class Fee {
 
 	public int getFee_num() {
 		return fee_num;
+	}
+//	public int getStd_num() {
+//		return std_num;
+//	}
+//	public void setStd_num(int std_num) {
+//		this.std_num = std_num;
+//	}
+	public Student getStudentFee() {
+		return studentFee;
+	}
+	public void setStudentFee(Student studentFee) {
+		this.studentFee = studentFee;
 	}
 	public void setFee_num(int fee_num) {
 		this.fee_num = fee_num;
