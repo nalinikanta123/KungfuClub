@@ -46,7 +46,7 @@ public class Parent {
 	//@JoinColumn(name = "std_number_son", referencedColumnName = "std_num",insertable=false, updatable=false)
 	@JoinColumn(name = "std_number_son", referencedColumnName = "std_num")
 	@ManyToOne
-	@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@stdNum")
+	//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@stdNum")
 	public Student student;
 
 	String prt_fname;
@@ -56,7 +56,7 @@ public class Parent {
 	
 	@ManyToOne()
 	@JoinColumn(name = "std_number", referencedColumnName = "std_num")
-	@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@stdNum1")
+	//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@stdNum1")
 	public Student studentParent;
 
 	// public ParentId getParentId() {

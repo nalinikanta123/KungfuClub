@@ -31,7 +31,7 @@ public class Fee {
 	@GeneratedValue
 	int fee_num;
 	String fee_description;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone="EST")
 	Date fee_date;
 	int fee_value;
 

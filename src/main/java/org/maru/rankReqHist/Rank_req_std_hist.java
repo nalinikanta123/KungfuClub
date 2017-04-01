@@ -28,19 +28,19 @@ public class Rank_req_std_hist {
 	@Id
 	@GeneratedValue
 	int serial_num;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone="EST")
 	Date dt_achieved;
 	@ManyToOne
 	@JoinColumn(name ="std_num")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@StdNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@StdNum")
 	public Student student;
 	@ManyToOne
 	@JoinColumn(name ="rk_code")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@RankNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@RankNum")
 	public Rank rank;
 	@ManyToOne
 	@JoinColumn(name ="req_num")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ReqNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ReqNum")
 	public Rank_Req rank_req;
 	
 	//Getter and Setter

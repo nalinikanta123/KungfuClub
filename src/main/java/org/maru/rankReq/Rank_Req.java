@@ -29,7 +29,7 @@ public class Rank_Req {
 	String req_description;
 	@ManyToOne
 	@JoinColumn(name ="rk_code")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ReqNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ReqNum")
 	public Rank rank;
 	
 	

@@ -29,13 +29,13 @@ public class Rank_history {
 	int rank_hist_num;
 	@ManyToOne
 	@JoinColumn(name ="std_num")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@feeNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@feeNum")
 	public Student student;
 	@ManyToOne
 	@JoinColumn(name ="rk_code")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@feeNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@feeNum")
 	public Rank rank;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone="EST")
 	Date dt_achieved;
 	
 	

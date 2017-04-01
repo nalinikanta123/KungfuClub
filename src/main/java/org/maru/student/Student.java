@@ -31,9 +31,9 @@ public class Student {
 	public int std_num;
 	public String std_fname;
 	public String std_lname;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone="EST")
 	public Date std_dob;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone="EST")
 	public Date std_date_enroll;
 	public int std_phone;
 	public String std_email;

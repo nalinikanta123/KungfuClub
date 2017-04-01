@@ -32,7 +32,7 @@ public class Class_Schedule {
 	String end_time;
 	@ManyToOne
 	@JoinColumn(name ="cls_code")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@clsNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@clsNum")
 	public Class classs;
 	
 	public int getSch_num() {

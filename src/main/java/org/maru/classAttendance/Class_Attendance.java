@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.maru.Test.Test;
 import org.maru.Topic.Topic;
@@ -30,17 +32,17 @@ public class Class_Attendance {
 	int cls_serial_num;
 	@ManyToOne
 	@JoinColumn(name ="std_num")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@stdNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@stdNum")
 	public Student studentFee;
 	@ManyToOne
 	@JoinColumn(name ="cls_code")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@clsNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@clsNum")
 	public Class classs;
 	@ManyToOne
 	@JoinColumn(name ="sch_num")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@schNum")
+	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@schNum")
 	public Class_Schedule classSch;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone="EST")
 	Date att_date;
 	
 	//Getter and Setters
