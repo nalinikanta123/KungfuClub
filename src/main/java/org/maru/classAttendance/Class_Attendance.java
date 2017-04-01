@@ -19,6 +19,7 @@ import org.maru.classMain.Class;
 import org.maru.classSchedule.Class_Schedule;
 import org.maru.student.Student;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -39,6 +40,7 @@ public class Class_Attendance {
 	@JoinColumn(name ="sch_num")
 	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@schNum")
 	public Class_Schedule classSch;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	Date att_date;
 	
 	//Getter and Setters

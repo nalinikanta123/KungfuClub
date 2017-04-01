@@ -19,6 +19,7 @@ import org.maru.Test.Test;
 import org.maru.fee.Fee;
 import org.maru.rank.Rank;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -30,7 +31,9 @@ public class Student {
 	public int std_num;
 	public String std_fname;
 	public String std_lname;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	public Date std_dob;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	public Date std_date_enroll;
 	public int std_phone;
 	public String std_email;

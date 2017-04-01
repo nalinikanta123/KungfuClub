@@ -19,6 +19,7 @@ import org.maru.rank.Rank;
 import org.maru.rankReq.Rank_Req;
 import org.maru.student.Student;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -27,6 +28,7 @@ public class Rank_req_std_hist {
 	@Id
 	@GeneratedValue
 	int serial_num;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	Date dt_achieved;
 	@ManyToOne
 	@JoinColumn(name ="std_num")

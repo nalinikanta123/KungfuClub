@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class StudentController {
 
@@ -31,7 +30,7 @@ public class StudentController {
 	// 2. Insert new student record
 	@RequestMapping(value = "/student", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public void addRank(@RequestBody Student student) {
-		System.out.println("Student num recieved = " + student.std_num );
+		System.out.println("Student num recieved = " + student.std_num);
 		System.out.println("Student Fname recieved = " + student.std_fname);
 		System.out.println("Student Lname recieved = " + student.std_lname);
 		System.out.println("Student phone recieved = " + student.std_phone);
@@ -43,19 +42,18 @@ public class StudentController {
 		System.out.println("Student city recieved = " + student.std_address_city);
 		System.out.println("Student prov recieved = " + student.std_address_prov);
 		System.out.println("Student zipcode recieved = " + student.std_address_zipcode);
-		//System.out.println("Student rank_code recieved = " + student.);
-		
+		// System.out.println("Student rank_code recieved = " + student.);
+
 		System.out.println("Calling add topic call\n");
-		//rankService.addRank(student.getRank());
+		// rankService.addRank(student.getRank());
 		studentService.addStudent(student);
 	}
-	
-	//3. Update existing record(For Example : Update Rank information)
-	@RequestMapping(value="/student/{id}", method = RequestMethod.PUT)
-	public void updateStudent(@RequestBody Student student,
-								@PathVariable int id){
+
+	// 3. Update existing record(For Example : Update Rank information)
+	@RequestMapping(value = "/student/{id}", method = RequestMethod.PUT)
+	public void updateStudent(@RequestBody Student student, @PathVariable int id) {
 		System.out.println("ID as paramter recieved = " + id);
-		System.out.println("Student num recieved = " + student.std_num );
+		System.out.println("Student num recieved = " + student.std_num);
 		System.out.println("Student Fname recieved = " + student.std_fname);
 		System.out.println("Student Lname recieved = " + student.std_lname);
 		System.out.println("Student phone recieved = " + student.std_phone);
@@ -69,18 +67,47 @@ public class StudentController {
 		System.out.println("Student zipcode recieved = " + student.std_address_zipcode);
 		studentService.updateStudent(id, student);
 	}
-	
-	//4. Get a particular student
-	@RequestMapping(value="/student/{id}", method=RequestMethod.GET) 
-	public Student getOneStudent(@PathVariable int id){
+
+	// 4. Get a particular student
+	@RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
+	public Student getOneStudent(@PathVariable int id) {
 		System.out.println("id recieved = " + id);
 		return studentService.getOneStudent(id);
 	}
-	
-	//5. Get student by rank
-	@RequestMapping(value="/student/rank/{id}", method=RequestMethod.GET)
-	public List<Student> getByStudentRank(@PathVariable int id){
+
+	// 5. Get student by rank
+	@RequestMapping(value = "/student/rank/{id}", method = RequestMethod.GET)
+	public List<Student> getByStudentRank(@PathVariable int id) {
 		System.out.println("id recieved = " + id);
 		return studentService.getByStudentRank(id);
 	}
+
+	// 6. Get Student by belt
+	@RequestMapping(value = "/student/belt/{id}", method = RequestMethod.GET)
+	public List<Student> getByStudentBelt(@PathVariable String id) {
+		System.out.println("belt recieved = " + id);
+		return studentService.getByStudentBelt(id);
+	}
+
+	// 7. Get Student by year
+	@RequestMapping(value = "/student/year/{id}", method = RequestMethod.GET)
+	public List<Student> getStudentByYear(@PathVariable int id) {
+		System.out.println("year recieved = " + id);
+		return studentService.getStudentByYear(id);
+	}
+
+	// 8. Get Student by >=year
+	@RequestMapping(value = "/student/yearGt/{id}", method = RequestMethod.GET)
+	public List<Student> getStudentByYearGt(@PathVariable int id) {
+		System.out.println("year recieved = " + id);
+		return studentService.getStudentByYearGt(id);
+	}
+
+	// 7. Get Student by belt
+	@RequestMapping(value = "/student/yearLt/{id}", method = RequestMethod.GET)
+	public List<Student> getStudentByYearLt(@PathVariable int id) {
+		System.out.println("year recieved = " + id);
+		return studentService.getStudentByYearLt(id);
+	}
+
 }

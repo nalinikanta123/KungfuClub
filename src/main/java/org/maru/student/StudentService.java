@@ -81,4 +81,32 @@ public class StudentService {
 		return student;
 	}
 
+	// 6. get all student by belt
+	public List<Student> getByStudentBelt(String id) {
+		List<Student> student = new ArrayList<Student>();
+		studentRepository.getStudentBelt(id).forEach(student::add);
+		return student;
+	}
+
+	// 7. get all student by year
+	public List<Student> getStudentByYear(int id) {
+		List<Student> student = new ArrayList<Student>();
+		studentRepository.getEnrollYear(id).forEach(student::add);
+		return student;
+	}
+
+	// 8. get all student by >= year
+	public List<Student> getStudentByYearGt(int id) {
+		List<Student> student = new ArrayList<Student>();
+		studentRepository.getEnrollYearGt(id).forEach(student::add);
+		return student;
+	}
+
+	// 9. get all student by <= year
+	public List<Student> getStudentByYearLt(int id) {
+		List<Student> student = new ArrayList<Student>();
+		studentRepository.getEnrollYearLt(id).forEach(student::add);
+		return student;
+	}
+
 }

@@ -18,6 +18,7 @@ import org.maru.Topic.Topic;
 import org.maru.rank.Rank;
 import org.maru.student.Student;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -34,6 +35,7 @@ public class Rank_history {
 	@JoinColumn(name ="rk_code")
 	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@feeNum")
 	public Rank rank;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	Date dt_achieved;
 	
 	

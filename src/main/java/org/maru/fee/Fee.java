@@ -21,6 +21,7 @@ import org.maru.Test.Test;
 import org.maru.Topic.Topic;
 import org.maru.student.Student;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -30,6 +31,7 @@ public class Fee {
 	@GeneratedValue
 	int fee_num;
 	String fee_description;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	Date fee_date;
 	int fee_value;
 
