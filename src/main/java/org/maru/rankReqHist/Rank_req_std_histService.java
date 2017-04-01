@@ -21,10 +21,17 @@ public class Rank_req_std_histService {
 		RankReqHistRepository.findAll().forEach(rankReqHist::add);
 		return rankReqHist;
 	}
-	
-	//2. Add new rank information
-	public void addRankReqHist(Rank_req_std_hist rankReqHist){
+
+	// 2. Add new rank information
+	public void addRankReqHist(Rank_req_std_hist rankReqHist) {
 		RankReqHistRepository.save(rankReqHist);
 	}
-	
+
+	// 2. Service to get all rank req information by student
+	public List<Rank_req_std_hist> getStudentReqHist(int std_num) {
+		List<Rank_req_std_hist> rankReqHist = new ArrayList<Rank_req_std_hist>();
+		RankReqHistRepository.getStudentReqHist(std_num).forEach(rankReqHist::add);
+		return rankReqHist;
+	}
+
 }

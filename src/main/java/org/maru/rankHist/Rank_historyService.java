@@ -21,10 +21,17 @@ public class Rank_historyService {
 		rkRepository.findAll().forEach(rankHist::add);
 		return rankHist;
 	}
-	
-	//2. Add new rank information
-	public void addRankHist(Rank_history rankHist){
+
+	// 2. Add new rank information
+	public void addRankHist(Rank_history rankHist) {
 		rkRepository.save(rankHist);
 	}
-	
+
+	// 3. Service to get all rank information for input student
+	public List<Rank_history> getAllRanksByStud(int stud_num) {
+		List<Rank_history> rankHist = new ArrayList<Rank_history>();
+		rkRepository.findStudRankHist(stud_num).forEach(rankHist::add);
+		return rankHist;
+	}
+
 }

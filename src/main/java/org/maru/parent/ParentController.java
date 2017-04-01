@@ -6,6 +6,7 @@ import org.maru.Topic.Topic;
 import org.maru.student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,35 +16,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class ParentController {
 
 	@Autowired
-	public ParentService feeService;
-	
-	// 1. Get all rank records
-		@RequestMapping("/parent")
-		public List<Parent> getAllParent() {
-			return feeService.getAllParent();
-		}
-		
-	//2.Add new Rank
-		@RequestMapping(value = "/parent", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-		public void addRank(@RequestBody Parent parent) {
-			System.out.println("Parent Fname recieved = " +parent.prt_fname);
-			System.out.println("Parent Lname recieved = " +parent.prt_lname);
-			//System.out.println("Parent Lname recieved = " +parent.getStd_number_son());
-			//System.out.println("Parent Lname recieved = " +parent.getStd_number());
-			System.out.println("Parent Lname recieved = " +parent.getStudent().std_num);
-			System.out.println("Parent Lname recieved = " +parent.getStudentParent().std_num);
-			System.out.println("Setting the correct values");
-			//parent.setStd_number_son(parent.getStudent().std_num);
-			//parent.setStd_number(parent.getStudentParent().std_num);
-			//System.out.println("Parent son recieved = " +parent.getStd_number_son());
-			//System.out.println("Parent parent recieved = " +parent.getStd_number());
-			
-			System.out.println("Calling add parent call\n");
-//			if(parent.getStudentParent().std_num ==0){
-//				parent.setStudentParent(null);
-//			}
-			feeService.addParent(parent);
-		}
-	
-	
+	public ParentService parentService;
+
+	// 1. Get all parent records
+	@RequestMapping("/parent")
+	public List<Parent> getAllParent() {
+		return parentService.getAllParent();
+	}
+
+	// 2.Add new parent
+	@RequestMapping(value = "/parent", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+	public void addRank(@RequestBody Parent parent) {
+		System.out.println("Parent Fname recieved = " + parent.prt_fname);
+		System.out.println("Parent Lname recieved = " + parent.prt_lname);
+		System.out.println("Parent Lname recieved = " + parent.getStudent().std_num);
+		System.out.println("Parent Lname recieved = " + parent.getStudentParent().std_num);
+		System.out.println("Setting the correct values");
+		System.out.println("Calling add parent call\n");
+		parentService.addParent(parent);
+	}
+
+	// 2. Get all parent records of student
+	@RequestMapping("/parent/stud/{id}")
+	public List<Parent> getStudentParent(@PathVariable int id) {
+		return parentService.getStudentParent(id);
+	}
+
 }
