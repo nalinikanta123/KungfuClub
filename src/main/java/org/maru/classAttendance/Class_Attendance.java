@@ -71,6 +71,4 @@ public class Class_Attendance {
 		this.att_date = att_date;
 	}
 	
-	
-	
 }

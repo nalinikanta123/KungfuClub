@@ -12,7 +12,7 @@ app.service("getRecordsByRank",getRecordsByRank);
 			console.log("inside service");
 			console.log(data);
 			
-			var p1= $http.get('http://localhost:8080/object2');
+			var p1= $http.get('http://localhost:8080/student');
 			var p2= p1.then(function (response){
 				console.log(response.data);
 				return response.data;
@@ -28,7 +28,7 @@ app.service("getRecordsByRank",getRecordsByRank);
 			console.log("inside service");
 			console.log("inside getRecordsByRank Data =" + data);
 			
-			var p1= $http.get('http://localhost:8080/topic/'+data);
+			var p1= $http.get('http://localhost:8080/student/'+data);
 			var p2= p1.then(function (response){
 				console.log(response.data);
 				return response.data;
@@ -50,7 +50,7 @@ app.service("getRecordsByRank",getRecordsByRank);
 			console.log(self.local.year);
 			console.log(self.local.belts);
 			console.log("End of user input");
-			var promise1 = $http.post("http://localhost:8080/students",self.local);
+			var promise1 = $http.post("http://localhost:8080/student",self.local);
 			var promise2 = promise1.then(function (response) {
 					console.log("Respone = " + response.data);
 					return response.data;

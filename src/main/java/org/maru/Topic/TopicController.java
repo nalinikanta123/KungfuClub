@@ -50,7 +50,7 @@ public class TopicController {
 
 	
 	//insert data
-	@RequestMapping(value = "/students", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+	@RequestMapping(value = "/xxxxx", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public void addStudent(@RequestBody Topic local) {
 		System.out.println("Name recieved = " + local.name);
 		System.out.println("age recieved = " + local.age);
@@ -62,7 +62,7 @@ public class TopicController {
 		System.out.println("Return from add topic call\n");
 	}
 
-	@RequestMapping("/object")
+	@RequestMapping("/xxxxxxx")
 	public List<Object> test1() {
 		ArrayList<Object> obj = new ArrayList<Object>();
 		local obj1 = new local("test1", 1, "2010", "1", "white");
