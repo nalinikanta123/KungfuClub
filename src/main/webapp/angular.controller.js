@@ -1,7 +1,8 @@
 (function(){
 	var app= angular.module("Project2", []);
 
-	app.controller('studentSearch', function(getAllStudentRecord,submitStudentRecord,getRecordsByRank){
+	app.controller('studentSearch', function(getAllStudentRecord,submitStudentRecord,getRecordsByBelt
+		,getRecordsByRank,getRecordsByYear,getRecordsByCombo){
 
 		var self=this;
 		self.searchType= "All";
@@ -23,6 +24,7 @@
 		self.addPageSelected=false;
 		self.showUpdatePage=false;
 		self.showViewFullPage=false;
+		self.yearOptionSelected="=";
 
 	//varibables to send data to backend
 	self.studentStruct={
@@ -87,6 +89,25 @@
 		}
 	};
 
+	//initialise structure for next student insertion	
+	self.refreshData = 	function(){
+		self.studentStruct.std_fname = "";
+		self.studentStruct.std_lname="";
+		self.studentStruct.std_dob="";
+		self.studentStruct.std_date_enroll="";
+		self.studentStruct.std_phone="";
+		self.studentStruct.std_email="";
+		self.studentStruct.std_address_line1="";
+		self.studentStruct.std_address_line2="";
+		self.studentStruct.std_address_city="";
+		self.studentStruct.std_address_prov="";
+		self.studentStruct.std_address_zipcode="";
+		self.studentStruct.rank.rk_code="";
+		self.studentStruct.rank.rk_name="";
+		self.studentStruct.rank.rk_belt_color="";
+	}
+
+	//******************functions to save data **************//
 	//function to save student record
 	self.saveStudent = function(){
 		self.studentStruct.rank.rk_code=4;
@@ -192,23 +213,7 @@
 	}
 	//*************End of Update function calls
 
-	//initialise structure for next student insertion	
-	self.refreshData = 	function(){
-		self.studentStruct.std_fname = "";
-		self.studentStruct.std_lname="";
-		self.studentStruct.std_dob="";
-		self.studentStruct.std_date_enroll="";
-		self.studentStruct.std_phone="";
-		self.studentStruct.std_email="";
-		self.studentStruct.std_address_line1="";
-		self.studentStruct.std_address_line2="";
-		self.studentStruct.std_address_city="";
-		self.studentStruct.std_address_prov="";
-		self.studentStruct.std_address_zipcode="";
-		self.studentStruct.rank.rk_code="";
-		self.studentStruct.rank.rk_name="";
-		self.studentStruct.rank.rk_belt_color="";
-	}
+
 
 	self.searchCall= function(data){
 		if(data == 'All'){
@@ -234,7 +239,7 @@
 			self.isSearchByYear=false;
 			self.showStudentResult=false;
 			self.studentRecord="";
-			console.log("After refreshData"+self.studentRecord );
+			self.yearOptionSelected="=";
 			self.refreshData();
 		}
 		else if(data == 'Rank'){
@@ -259,6 +264,7 @@
 			self.isSearchByYear=true;
 			self.showStudentResult=false;
 			self.studentRecord="";
+			self.yearOptionSelected="=";
 			self.refreshData();
 		}
 		else if(data == 'Belts'){
@@ -352,47 +358,53 @@
 
 	//function to call API to get all student for a belt
 	self.searchByBelt=function(data){
-		console.log("Call to searchByBelt recieved");
+		//console.log("Call to searchByBelt recieved");
 		self.showStudentResult=true;
 		self.apiCallToGetStudByBelt(data);
-		//call API
 	}
 	//function to call API to get all student for a year
-	self.searchByYear=function(){
+	self.searchByYear=function(data1,data2){
+		console.log("mode recieved= " + data2);
+		console.log("value recieved =" + data1);
+		if(data2 == ">="){
+			self.searchByYearGt(data1);
+		}
+		else if(data2=="<="){
+			self.searchByYearLt(data1);
+		}
+		self.apiCallToGetStudByYear(data1);
 		self.showStudentResult=true;
 		//call API
 	}
 	//function to call API to get all student for a year greater
-	self.searchByYearGt=function(){
+	self.searchByYearGt=function(data1){
+		console.log("Call recieved in searchByYearGt with data = " + data1);
+		self.apiCallToGetStudByYearGt(data1);
 		self.showStudentResult=true;
 		//call API
 	}
 	//function to call API to get all student for a year less
-	self.searchByYearLt=function(){
+	self.searchByYearLt=function(data1){
+		console.log("Call recieved in searchByYearLt with data = " + data1);
+		self.apiCallToGetStudByYearLt(data1);
 		self.showStudentResult=true;
 		//call API
 	}
 	//function to call API to get all student for a rank
-	self.searchByRank=function(){
+	self.searchByRank=function(data){
+		console.log("Data = " + data);
 		self.showStudentResult=true;
-		//call API
+		self.apiCallToGetStudByRank(data);
 	}
 	//function to call API to get all student for a combo
-	self.searchByCombo=function(){
+	self.searchByCombo=function(data1,data2,data3){
+		console.log("Call recieved in searchByCombo with data = " + data1 + data2 +data3);
 		self.showStudentResult=true;
+		self.apiCallToGetStudByCombo(data1,data2,data3);
 		//call API
 	}
 
-	// self.callSearchByBelt=function(){
-	// 	self.apiCall2();
-	// }
 
-		// getAllStudentRecord.getRecords(self.searchType)
-		// .then(function(data){
-		// 	console.log(data);
-		// 	self.studentRecord =data;
-		// })
-	
 
 	//************API CALL Functions**************//
 	//Api call to get all student
@@ -405,25 +417,58 @@
 	}
 	
 	//Api call to get all by rank 
-	self.apiCallToGetStudByRank=function(argument){
-		console("data for apiCallToGetStudByRank = " + argument);
-		//getRecordsByRank.getRecords(self.studentStruct.belts)
+	self.apiCallToGetStudByRank=function(arg1){
+		getRecordsByRank.getRecords(arg1)
 		.then(function(data){
 			console.log(data);
 			self.studentRecord =data;
 		})
 	}
 
-	//Api call to get all by rank 
-	self.apiCallToGetStudByBelt=function(argument){
-		console("data for apiCallToGetStudByBelt = " + argument);
-		getRecordsByRank.getRecords(data)
+	//Api call to get all by belt 
+	self.apiCallToGetStudByBelt=function(arg1){
+		getRecordsByBelt.getRecords(arg1)
+		.then(function(data){
+			console.log(data);
+			self.studentRecord =data;
+		})
+	}
+
+	//Api call to get all by = year 
+	self.apiCallToGetStudByYear=function(arg1){
+		getRecordsByYear.getRecords(arg1)
 		.then(function(data){
 			console.log(data);
 			self.studentRecord =data;
 		})
 	}
 	
+	//Api call to get all by <= year 
+	self.apiCallToGetStudByYearLt=function(arg1){
+		getRecordsByYear.getRecordsLt(arg1)
+		.then(function(data){
+			console.log(data);
+			self.studentRecord =data;
+		})
+	}
+
+	//Api call to get all by >= year 
+	self.apiCallToGetStudByYearGt=function(arg1){
+		getRecordsByYear.getRecordsGt(arg1)
+		.then(function(data){
+			console.log(data);
+			self.studentRecord =data;
+		})
+	}
+
+	//Api call to get all by combo 
+	self.apiCallToGetStudByCombo=function(arg1,arg2,arg3){
+		getRecordsByCombo.getRecords(arg1,arg2,arg3)
+		.then(function(data){
+			console.log(data);
+			self.studentRecord =data;
+		})
+	}
 
 
 });

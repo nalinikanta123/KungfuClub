@@ -103,20 +103,25 @@
         </div>
       </div> 
       <div class="col-sm-3" ng-show="stud.isSearchByRank">
-        <button type="button" class="btn btn-primary" style="margin-top: 24px;" ng-click="stud.searchByRank()">
+        <button type="button" class="btn btn-primary" style="margin-top: 24px;" ng-click="stud.searchByRank(stud.studentStruct.rank.rk_code)">
             Search
         </button>
       </div>
-      <div class="col-sm-3" ng-show="stud.isSearchByYear">
+      <div class="col-sm-8" ng-show="stud.isSearchByYear">
         <div class="form-group" >
-          <label for="year">Year:</label><br>
+          <label for="year">Year of Enrollment:</label><br>
           <div class="input-group">
-            <input type="text" class="form-control" aria-describedby="basic-addon1" style="width: 200px" ng-model="stud.studentStruct.year">
+            <select class="form-control" id="belts" ng-model="stud.yearOptionSelected" style="width: 50px">
+              <option><=</option>
+              <option>=</option>
+              <option>>=</option>
+            </select> 
+            <input type="text" class="form-control" aria-describedby="basic-addon1" style="width: 200px" ng-model="stud.studentStruct.std_date_enroll" placeholder="YYYY">
           </div>
         </div>
       </div>
       <div class="col-sm-3" ng-show="stud.isSearchByYear">
-        <button type="button" class="btn btn-primary" style="margin-top: 24px;" ng-click="stud.searchByYear()">
+        <button type="button" class="btn btn-primary" style="margin-top: 24px;" ng-click="stud.searchByYear(stud.studentStruct.std_date_enroll,stud.yearOptionSelected)">
             Search
         </button>
       </div> 
@@ -137,6 +142,7 @@
           </select> 
         </div>
       </div> 
+      <!-- Not required as rank and belt are 1-1 mapped
       <div class="col-sm-3">
         <div class="form-group" >
           <div class="form-group" >
@@ -146,17 +152,22 @@
             </div>
           </div>
         </div>
-      </div> 
-      <div class="col-sm-3">
+      </div> -->
+      <div class="col-sm-6">
         <div class="form-group" >
-          <label for="year">Year:</label><br>
+          <label for="year">Year Of Enrollment:</label><br>
           <div class="input-group">
-            <input type="text" class="form-control" aria-describedby="basic-addon1" style="width: 200px" ng-model="stud.studentStruct.year">
+            <select class="form-control" id="belts" ng-model="stud.yearOptionSelected" style="width: 50px">
+              <option><=</option>
+              <option>=</option>
+              <option>>=</option>
+            </select> 
+            <input type="text" class="form-control" aria-describedby="basic-addon1" style="width: 200px" ng-model="stud.studentStruct.std_date_enroll" placeholder="YYYY">
           </div>
         </div>
       </div> 
       <div class="col-sm-3" ng-show="stud.isSearchByCombo">
-        <button type="button" class="btn btn-primary" style="margin-top: 24px;"  ng-click="stud.searchByCombo()">
+        <button type="button" class="btn btn-primary" style="margin-top: 24px;"  ng-click="stud.searchByCombo(stud.studentStruct.belts,stud.studentStruct.std_date_enroll,stud.yearOptionSelected)">
             Search
         </button>
       </div> 
@@ -497,51 +508,51 @@
           <form>
              <div class="form-group">
               <label for="usr">First Name:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Last Name:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">DOB:</label>
-              <input type="text" class="form-control" id="usr" ng-model="" >
+              <input type="text" class="form-control" id="usr"  >
              </div>
              <div class="form-group">
               <label for="usr">Enroll Date:</label>
-              <input type="text" class="form-control" id="usr" ng-model="" >
+              <input type="text" class="form-control" id="usr"  >
              </div>
              <div class="form-group">
               <label for="usr">Phone:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Email:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Address 1:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Address 2:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">City:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Province:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Postal Code:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group" >
               <label for="usr">Rank Code:</label>
-              <input type="text" class="form-control" id="usr"  ng-model="">
+              <input type="text" class="form-control" id="usr"  >
              </div>
              <button class="btn btn-primary" ng-click = "">Submit</button>
           </form>
@@ -556,19 +567,19 @@
           <form>
              <div class="form-group">
               <label for="usr">Student Id:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr">
              </div>
              <div class="form-group">
               <label for="usr">Fee Description:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr">
              </div>
              <div class="form-group">
               <label for="usr">Fee Value:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr"> Date:</label>
-              <input type="text" class="form-control" id="usr" ng-model="" placeholder="YYYY-DD-MM">
+              <input type="text" class="form-control" id="usr" placeholder="YYYY-DD-MM">
              </div>
              <button class="btn btn-primary" ng-click = "">Submit</button>
           </form>
@@ -583,31 +594,31 @@
           <form>
              <div class="form-group">
               <label for="usr">Student Id:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Parent Type:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">First Name:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Last Name:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Phone:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Email:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Parent Student Id(If any):</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <button class="btn btn-primary" ng-click = "">Submit</button>
           </form>
@@ -622,19 +633,19 @@
           <form>
              <div class="form-group">
               <label for="usr">Student Id:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Class Code:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Class Schedule:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <div class="form-group">
               <label for="usr">Attendence Date:</label>
-              <input type="text" class="form-control" id="usr" ng-model="">
+              <input type="text" class="form-control" id="usr" >
              </div>
              <button class="btn btn-primary" ng-click = "">Submit</button>
           </form>

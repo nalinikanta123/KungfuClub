@@ -1,5 +1,6 @@
 package org.maru.student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.maru.Topic.TopicService;
@@ -110,4 +111,35 @@ public class StudentController {
 		return studentService.getStudentByYearLt(id);
 	}
 
+	// 8. Get combined table result (belt,year)
+	@RequestMapping(value = "/student/combo/{belt}/{year}/{mode}", method = RequestMethod.GET)
+	public List<Student> getStudentByCombo(@PathVariable String belt, @PathVariable int year, @PathVariable String mode) {
+		System.out.println("belt = " + belt);
+		System.out.println("year = " + year);
+		System.out.println("mode = " + mode);
+
+		List<Student> studByBelt = studentService.getByStudentBelt(belt);
+		List<Student> studByYear = new ArrayList<>();
+		List<Student> studByCombo = new ArrayList<>();
+		if (mode.equals(">=")) {
+			System.out.println("inside >= call");
+			studByYear = studentService.getStudentByYearGt(year);
+		} else if (mode.equals("<=")) {
+			System.out.println("inside <= call");
+			studByYear = studentService.getStudentByYearLt(year);
+		} else {
+			System.out.println("inside = call");
+			studByYear = studentService.getStudentByYear(year);
+		}
+		
+		for(int i=0; i < studByBelt.size(); i++){
+			for (int j=0; j <studByYear.size(); j++){
+				if(studByBelt.get(i).std_num==studByYear.get(j).std_num){
+					studByCombo.add(studByBelt.get(i));
+				}
+			}
+		}
+		
+		return studByCombo;
+	}
 }

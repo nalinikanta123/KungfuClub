@@ -49,6 +49,11 @@
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq-meta</artifactId>
 		</dependency>
+		<!-- realtime loading -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

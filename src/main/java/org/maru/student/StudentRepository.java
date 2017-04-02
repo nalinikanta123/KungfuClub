@@ -22,5 +22,5 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
 		
 		@Query("select s from Student s where EXTRACT (year FROM std_date_enroll) <=?1")
 		public List<Student> getEnrollYearLt(int year);
-		
+	
 }
