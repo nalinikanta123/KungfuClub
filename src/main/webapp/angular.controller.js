@@ -220,6 +220,8 @@
 			self.isSearchByRank=false;
 			self.isSearchByYear=false;
 			self.showStudentResult=true;
+			self.refreshData();
+			self.studentRecord="";
 			self.apiCall();	
 		}
 		else if(data == 'Combo'){
@@ -231,6 +233,9 @@
 			self.isSearchByCombo=true;
 			self.isSearchByYear=false;
 			self.showStudentResult=false;
+			self.studentRecord="";
+			console.log("After refreshData"+self.studentRecord );
+			self.refreshData();
 		}
 		else if(data == 'Rank'){
 			self.searchType= "By Rank";
@@ -241,6 +246,8 @@
 			self.isSearchByRank=true;
 			self.isSearchByYear=false;
 			self.showStudentResult=false;
+			self.studentRecord="";
+			self.refreshData();
 		}
 		else if(data == 'Year'){
 			self.searchType= "By Year";
@@ -251,6 +258,8 @@
 			self.isSearchByRank=false;
 			self.isSearchByYear=true;
 			self.showStudentResult=false;
+			self.studentRecord="";
+			self.refreshData();
 		}
 		else if(data == 'Belts'){
 			self.searchType= "By Belts";
@@ -260,6 +269,8 @@
 			self.isSearchByCombo=false;
 			self.isSearchByYear=false;
 			self.showStudentResult=false;
+			self.studentRecord="";
+			self.refreshData();
 		}
 	}
 	self.changePage=function(data){
@@ -340,8 +351,10 @@
 
 
 	//function to call API to get all student for a belt
-	self.searchByBelt=function(){
+	self.searchByBelt=function(data){
+		console.log("Call to searchByBelt recieved");
 		self.showStudentResult=true;
+		self.apiCallToGetStudByBelt(data);
 		//call API
 	}
 	//function to call API to get all student for a year
@@ -370,16 +383,19 @@
 		//call API
 	}
 
-	self.callSearchByBelt=function(){
-		self.apiCall2();
-	}
+	// self.callSearchByBelt=function(){
+	// 	self.apiCall2();
+	// }
 
-		getAllStudentRecord.getRecords(self.searchType)
-		.then(function(data){
-			console.log(data);
-			self.studentRecord =data;
-		})
+		// getAllStudentRecord.getRecords(self.searchType)
+		// .then(function(data){
+		// 	console.log(data);
+		// 	self.studentRecord =data;
+		// })
 	
+
+	//************API CALL Functions**************//
+	//Api call to get all student
 	self.apiCall=function(){
 		getAllStudentRecord.getRecords(self.searchType)
 		.then(function(data){
@@ -388,14 +404,27 @@
 		})
 	}
 	
-	self.apiCall2=function(){
-		getRecordsByRank.getRecords(self.studentStruct.belts)
+	//Api call to get all by rank 
+	self.apiCallToGetStudByRank=function(argument){
+		console("data for apiCallToGetStudByRank = " + argument);
+		//getRecordsByRank.getRecords(self.studentStruct.belts)
+		.then(function(data){
+			console.log(data);
+			self.studentRecord =data;
+		})
+	}
+
+	//Api call to get all by rank 
+	self.apiCallToGetStudByBelt=function(argument){
+		console("data for apiCallToGetStudByBelt = " + argument);
+		getRecordsByRank.getRecords(data)
 		.then(function(data){
 			console.log(data);
 			self.studentRecord =data;
 		})
 	}
 	
+
 
 });
 

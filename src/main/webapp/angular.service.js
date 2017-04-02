@@ -28,7 +28,7 @@ app.service("getRecordsByRank",getRecordsByRank);
 			console.log("inside service");
 			console.log("inside getRecordsByRank Data =" + data);
 			
-			var p1= $http.get('http://localhost:8080/student/'+data);
+			var p1= $http.get('http://localhost:8080/student/belt/'+data);
 			var p2= p1.then(function (response){
 				console.log(response.data);
 				return response.data;

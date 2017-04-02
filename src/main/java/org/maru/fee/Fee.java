@@ -82,4 +82,5 @@ public class Fee {
 	public void setStudent(Student student) {
 		this.studentFee = student;
 	}
+	
 }
