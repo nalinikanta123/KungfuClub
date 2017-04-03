@@ -132,6 +132,17 @@ app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 			});
 			return p2;
 		}
+
+		//get all rank info
+		self.getRankRecords= function(){
+			console.log("inside getRankRecords service");
+			var p1= $http.get('http://localhost:8080/rank/');
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
 	}
 
 
@@ -179,6 +190,32 @@ app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 			console.log("inside save class schedule");
 			console.log(self.local);
 			var promise1 = $http.post("http://localhost:8080/classSchedule",self.local);
+			var promise2 = promise1.then(function (response) {
+					console.log("Respone = " + response.data);
+					return response.data;
+			});
+			return promise2;
+		}
+
+		//save class Rank
+		self.saveRank = function(data){
+			self.local=data;
+			console.log("inside save Rank");
+			console.log(self.local);
+			var promise1 = $http.post("http://localhost:8080/rank",self.local);
+			var promise2 = promise1.then(function (response) {
+					console.log("Respone = " + response.data);
+					return response.data;
+			});
+			return promise2;
+		}
+
+		//save rank req
+		self.saveRankReq= function(data){
+			self.local=data;
+			console.log("inside save Rank");
+			console.log(self.local);
+			var promise1 = $http.post("http://localhost:8080/rankReq",self.local);
 			var promise2 = promise1.then(function (response) {
 					console.log("Respone = " + response.data);
 					return response.data;

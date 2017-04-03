@@ -8,6 +8,8 @@
 		self.searchType= "All";
 		var studentRecord ;
 		var classRecords;
+		var rankRecords;
+		var rankReqRecords;
 		self.pageTypeSearch=true;
 		self.recordNotInserted=false;
 		self.recInsertedSuccessfully=true;
@@ -26,6 +28,8 @@
 		self.showUpdatePage=false;
 		self.showViewFullPage=false;
 		self.yearOptionSelected="=";
+		self.alertMessage="";
+
 
 	//varibables to send data to backend
 	self.studentStruct={
@@ -80,14 +84,22 @@
 	self.rankReqStruct={
 		"dt_achieved": "",
 		"student":{
-			"std_num": "",
-			"std_fname":"",
+			"std_num": ""
 		},
 		"rank":{
 			"rk_code" :""
 		},
 		"rank_req":{
 			"req_num" :""
+		}
+	};
+
+	//structure of saving new rankRe
+	self.newRankReq={
+		"req_num": "",
+		"req_description" : "",
+		"rank":{
+		"rk_code" : ""
 		}
 	};
 
@@ -127,6 +139,26 @@
 		
 	};
 
+	self.refreshrankStruct=function(){
+		self.rankStruct.rk_code="";
+		self.rankStruct.rk_name="";
+		self.rankStruct.rk_belt_color="";
+	}
+
+	self.refreshrankReqStruct=function(){
+		self.rankReqStruct.dt_achieved="";
+		self.rankReqStruct.student.std_num="";
+		self.rankReqStruct.rank.rk_code="";
+		self.rankReqStruct.rank_req.req_num="";
+	}
+
+	self.refreshnewRankReq=function(){
+		self.newRankReq.req_num="";
+		self.newRankReq.req_description="";
+		self.newRankReq.rank.rk_code="";
+	};
+
+	
 	//******************functions to save data **************//
 	//function to save student record
 	self.saveStudent = function(){
@@ -154,11 +186,15 @@
 	}
 	//function to save Rank record
 	self.saveRank = function(){
-		
+		self.apiCallToSaveRank(self.rankStruct);
+		self.recordNotInserted=true;
+		self.addRankPage=false;
 	}
 	//function to save Rank Reg record
 	self.saveRankReq = function(){
-		
+		self.apiCallToSaveRankReq(self.newRankReq);
+		self.recordNotInserted=true;
+		self.addRankReqPage=false;
 	}
 
 	//************UPDATE CALLS*************//
@@ -363,6 +399,7 @@
 
 		}
 		else if(data == 'Rank'){
+			self.refreshrankStruct();
 			self.recordNotInserted=false;
 			self.addStudentPage=false;
 			self.addClassPage=false;
@@ -372,6 +409,10 @@
 			self.addPageSelected=true;
 		}
 		else if(data == 'RankReq'){
+			//self.refreshrankReqStruct();
+			self.refreshnewRankReq();
+			self.apiCallToGetGeneralRecordsForRank(); // get all class id record
+			self.rankReqRecords="";
 			self.recordNotInserted=false;
 			self.addStudentPage=false;
 			self.addClassPage=false;
@@ -498,12 +539,29 @@
 	}
 
 	//Api call to get all class records
-	getGeneralRecordsForForm
 	self.apiCallToGetGeneralRecordsForClass=function(){
 		getGeneralRecordsForForm.getClassRecords()
 		.then(function(data){
 			console.log(data);
 			self.classRecords =data;
+		})
+	}
+
+
+	self.apiCallToGetGeneralRecordsForRank=function(){
+		getGeneralRecordsForForm.getRankRecords()
+		.then(function(data){
+			console.log(data);
+			self.rankRecords =data;
+		})
+	}
+
+	//get rank req
+	self.apiCallToGetGeneralRecordsForRankReq=function(data){
+		getGeneralRecordsForForm.getRankReqRecords(data)
+		.then(function(data){
+			console.log(data);
+			self.rankReqRecords =data;
 		})
 	}
 
@@ -514,6 +572,7 @@
 		submitStudentRecord.saveRecord(arg1)
 		.then(function (argument) {
 			console.log("Success");
+			self.alertMessage="Student";
 			self.recInsertedSuccessfully=true;
 		},function (argument){
 			console.log("Failure");
@@ -526,6 +585,7 @@
 		submitExtraServices.saveClass(arg1)
 		.then(function (argument) {
 			console.log("Success");
+			self.alertMessage="Class";
 			self.recInsertedSuccessfully=true;
 		},function (argument){
 			console.log("Failure");
@@ -538,6 +598,7 @@
 		submitExtraServices.saveClassSchedule(arg1)
 		.then(function (argument) {
 			console.log("Success");
+			self.alertMessage="Class Schedule";
 			self.recInsertedSuccessfully=true;
 		},function (argument){
 			console.log("Failure");
@@ -545,6 +606,31 @@
 		});
 	}
 
+	//Api call to save Rank 
+	self.apiCallToSaveRank=function(arg1){
+		submitExtraServices.saveRank(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.alertMessage="Rank";
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
+	}
+
+	//Api to save new rank req
+	self.apiCallToSaveRankReq=function(arg1){
+		submitExtraServices.saveRankReq(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.alertMessage="Rank Requirement";
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
+	}
 
 
 });

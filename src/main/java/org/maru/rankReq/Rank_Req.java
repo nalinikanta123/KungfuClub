@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Rank_Req {
 	
 	@Id
+	@GeneratedValue
 	int req_num;
 	String req_description;
 	@ManyToOne

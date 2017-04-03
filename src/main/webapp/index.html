@@ -290,11 +290,11 @@
         </div>
          <div class="form-group">
           <label for="usr">DOB:</label>
-          <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_dob" placeholder="YYYY-DD-MM">
+          <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_dob" placeholder="YYYY-MM-DD">
         </div>
          <div class="form-group">
           <label for="usr">Enroll Date:</label>
-          <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_date_enroll" placeholder="YYYY-DD-MM">
+          <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_date_enroll" placeholder="YYYY-MM-DD">
         </div>
          <div class="form-group">
           <label for="usr">Phone:</label>
@@ -384,6 +384,10 @@
     <div ng-show="stud.addRankPage">
       <h3 style="text-align: center;">Rank Form</h3>
       <div class="form-group">
+          <label for="usr">Rank Code:</label>
+          <input type="text" class="form-control" id="usr"  ng-model="stud.rankStruct.rk_code">
+      </div>
+      <div class="form-group">
           <label for="usr">Rank Name:</label>
           <input type="text" class="form-control" id="usr"  ng-model="stud.rankStruct.rk_name">
       </div>
@@ -398,21 +402,15 @@
     <!--Start of RankReq form-->
     <div ng-show="stud.addRankReqPage">
       <h3 style="text-align: center;">Rank Achieved Form</h3>
-      <div class="form-group">
-          <label for="usr"> Student Num:</label>
-          <input type="text" class="form-control" id="usr"  ng-model="stud.rankReqStruct.student.std_num">
-      </div>
        <div class="form-group">
           <label for="usr"> Rank:</label>
-          <input type="text" class="form-control" id="usr"  ng-model="stud.rankReqStruct.rank.rk_code">
+          <select class="form-control" ng-model="stud.newRankReq.rank.rk_code"" >
+            <option ng-repeat="option in stud.rankRecords" value="{{option.rk_code}}">{{option.rk_code}}</option>
+          </select>
       </div>
        <div class="form-group">
-          <label for="usr"> Rank Req Number:</label>
-          <input type="text" class="form-control" id="usr"  ng-model="stud.rankReqStruct.rank_req.req_num">
-      </div>
-       <div class="form-group">
-          <label for="usr"> Date Achieved:</label>
-          <input type="text" class="form-control" id="usr"  ng-model="stud.rankReqStruct.dt_achieved">
+          <label for="usr"> Rank Req Description:</label>
+          <input type="text" class="form-control" id="usr"  ng-model="stud.newRankReq.req_description">
       </div>
       <button class="btn btn-primary" ng-click = "stud.saveRankReq()">Submit</button>
     </div>
@@ -421,7 +419,7 @@
     <!--Success and failure messages for -->
     <div ng-show="stud.recordNotInserted">
       <div class="alert alert-success" ng-show="stud.recInsertedSuccessfully">
-       <strong>Success!</strong> Student added successfully.
+       <strong>Success!</strong> {{stud.alertMessage}} added successfully.
       </div>
       <div class="alert alert-danger" ng-hide="stud.recInsertedSuccessfully">
         <strong>Insertion Failed!</strong> Something went wrong. Please retry later.
@@ -585,7 +583,7 @@
              </div>
              <div class="form-group">
               <label for="usr"> Date:</label>
-              <input type="text" class="form-control" id="usr" placeholder="YYYY-DD-MM">
+              <input type="text" class="form-control" id="usr" placeholder="YYYY-MM-DD">
              </div>
              <button class="btn btn-primary" ng-click = "">Submit</button>
           </form>
@@ -678,7 +676,7 @@
              </div>
              <div class="form-group">
               <label for="usr">Date of Achievement:</label>
-              <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_fname" placeholder="YYYY-DD-MM">
+              <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_fname" placeholder="YYYY-MM-DD">
              </div>
              <button class="btn btn-primary" ng-click = "stud.UpdateStudent()">Submit</button>
           </form>
