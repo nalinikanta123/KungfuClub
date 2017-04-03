@@ -21,10 +21,16 @@ public class Rank_ReqService {
 		rankReqRepository.findAll().forEach(rankReq::add);
 		return rankReq;
 	}
-	
-	//2. Add new rank information
-	public void addRankReq(Rank_Req rankReq){
+
+	// 2. Add new rank information
+	public void addRankReq(Rank_Req rankReq) {
 		rankReqRepository.save(rankReq);
 	}
-	
+
+	// 1. Service to get all rank information
+	public List<Rank_Req> getRankReqByRank(int id) {
+			List<Rank_Req> rankReq = new ArrayList<Rank_Req>();
+			rankReqRepository.getRankReqByRank(id).forEach(rankReq::add);
+			return rankReq;
+		}
 }

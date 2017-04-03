@@ -21,10 +21,17 @@ public class Class_ScheduleService {
 		classSRepository.findAll().forEach(classs::add);
 		return classs;
 	}
-	
-	//2. Add new rank information
-	public void addClassSchedule(Class_Schedule classs){
+
+	// 2. Add new rank information
+	public void addClassSchedule(Class_Schedule classs) {
 		classSRepository.save(classs);
 	}
-	
+
+	// 3.. Service to get all schdule of one class
+	public List<Class_Schedule> getAllClassSchedulbyClass(int id) {
+		List<Class_Schedule> classs = new ArrayList<Class_Schedule>();
+		classSRepository.getClassScheduleByClass(id).forEach(classs::add);
+		return classs;
+	}
+
 }

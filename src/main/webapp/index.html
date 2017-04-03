@@ -79,7 +79,7 @@
       <div class="col-sm-3" ng-show="stud.isSearchByBelts">
         <div class="form-group" >
           <label for="belts">Belt:</label>
-          <select class="form-control" id="belts" ng-model="stud.studentStruct.belts" style="width: 200px">
+          <select class="form-control" id="belts" ng-model="stud.beltSearchType" style="width: 200px">
             <option>white</option>
             <option>black</option>
             <option>yellow</option>
@@ -88,7 +88,7 @@
         </div>
       </div> 
       <div class="col-sm-3" ng-show="stud.isSearchByBelts">
-        <button type="button" class="btn btn-primary" style="margin-top: 23px;" ng-click="stud.searchByBelt(stud.studentStruct.belts)">
+        <button type="button" class="btn btn-primary" style="margin-top: 23px;" ng-click="stud.searchByBelt(stud.beltSearchType)">
             Search
         </button>
       </div>
@@ -134,7 +134,7 @@
       <div class="col-sm-3">
         <div class="form-group" >
           <label for="belts">Belt:</label>
-          <select class="form-control" id="belts" ng-model="stud.studentStruct.belts" style="width: 200px">
+          <select class="form-control" id="belts" ng-model="stud.beltSearchType" style="width: 200px">
             <option>white</option>
             <option>black</option>
             <option>yellow</option>
@@ -167,7 +167,7 @@
         </div>
       </div> 
       <div class="col-sm-3" ng-show="stud.isSearchByCombo">
-        <button type="button" class="btn btn-primary" style="margin-top: 24px;"  ng-click="stud.searchByCombo(stud.studentStruct.belts,stud.studentStruct.std_date_enroll,stud.yearOptionSelected)">
+        <button type="button" class="btn btn-primary" style="margin-top: 24px;"  ng-click="stud.searchByCombo(stud.beltSearchType,stud.studentStruct.std_date_enroll,stud.yearOptionSelected)">
             Search
         </button>
       </div> 
@@ -203,23 +203,23 @@
               </button>
             </div>  
             <div class="btn-group">
-              <button type="button" class="btn btn-primary" ng-click="stud.viewAddFeePage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; margin-top: 10px">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewAddFeePage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; margin-top: 10px">
                 Add Fee
               </button>
             </div>
             <br>
             <div class="btn-group">
-              <button type="button" class="btn btn-primary" ng-click="stud.viewAddParentPage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewAddParentPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
                 Add Parent
               </button>
             </div>
             <div class="btn-group">
-              <button type="button" class="btn btn-primary" ng-click="stud.viewAddClassAttPage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewAddClassAttPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
                 Add Class Attendence
               </button>
             </div>
             <div class="btn-group">
-              <button type="button" class="btn btn-primary" ng-click="stud.viewAddRankReqCompPage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewAddRankReqCompPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
                 Add Req Compeletion
               </button>
             </div> 
@@ -283,15 +283,22 @@
          <div class="form-group">
           <label for="usr">First Name:</label>
           <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_fname">
-        </div>
+         </div>
          <div class="form-group">
           <label for="usr">Last Name:</label>
           <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_lname">
-        </div>
+         </div>
+         <div class="form-group">
+            <label for="usr">Status:</label>
+            <select class="form-control" ng-model="stud.studentStruct.status" >
+                <option>active</option>
+                <option>inactive</option>
+            </select> 
+         </div>
          <div class="form-group">
           <label for="usr">DOB:</label>
           <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_dob" placeholder="YYYY-MM-DD">
-        </div>
+         </div>
          <div class="form-group">
           <label for="usr">Enroll Date:</label>
           <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_date_enroll" placeholder="YYYY-MM-DD">
@@ -453,6 +460,10 @@
               <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_lname" disabled="true">
              </div>
              <div class="form-group">
+              <label for="usr">Status:</label>
+              <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.status" disabled="true">
+             </div>
+             <div class="form-group">
               <label for="usr">DOB:</label>
               <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_dob" disabled="true">
              </div>
@@ -519,6 +530,13 @@
               <input type="text" class="form-control" id="usr"   ng-model="stud.studentStruct.std_lname">
              </div>
              <div class="form-group">
+              <label for="usr">Status:</label>
+              <select class="form-control" ng-model="stud.studentStruct.status" >
+                <option>active</option>
+                <option>inactive</option>
+              </select> 
+             </div>
+             <div class="form-group">
               <label for="usr">DOB:</label>
               <input type="text" class="form-control" id="usr"  ng-model="stud.studentStruct.std_dob">
              </div>
@@ -570,22 +588,22 @@
           <h3 style="text-align: center;">Add Fee Form</h3>
           <form>
              <div class="form-group">
-              <label for="usr">Student Id:</label>
-              <input type="text" class="form-control" id="usr">
+              <label for="usr">Student:</label>
+              <input type="text" class="form-control" id="usr" disabled="true" ng-model="stud.newFeeStruct.student.std_num" value="stud.studentStruct.std_num">
              </div>
              <div class="form-group">
               <label for="usr">Fee Description:</label>
-              <input type="text" class="form-control" id="usr">
+              <input type="text" class="form-control" id="usr" ng-model="stud.newFeeStruct.fee_description">
              </div>
              <div class="form-group">
               <label for="usr">Fee Value:</label>
-              <input type="text" class="form-control" id="usr" >
+              <input type="text" class="form-control" id="usr" ng-model="stud.newFeeStruct.fee_value">
              </div>
              <div class="form-group">
               <label for="usr"> Date:</label>
-              <input type="text" class="form-control" id="usr" placeholder="YYYY-MM-DD">
+              <input type="text" class="form-control" id="usr" placeholder="YYYY-MM-DD" ng-model="stud.newFeeStruct.fee_date">
              </div>
-             <button class="btn btn-primary" ng-click = "">Submit</button>
+             <button class="btn btn-primary" ng-click = "stud.updateStudentFeeRecord()" >Submit</button>
           </form>
          </div>
       </div>
@@ -598,33 +616,39 @@
           <form>
              <div class="form-group">
               <label for="usr">Student Id:</label>
-              <input type="text" class="form-control" id="usr" >
+              <input type="text" class="form-control" id="usr" ng-model="stud.newParentStruct.student.std_num" disabled="true">
              </div>
              <div class="form-group">
               <label for="usr">Parent Type:</label>
-              <input type="text" class="form-control" id="usr" >
+              <select class="form-control" id="belts" ng-model="stud.newParentStruct.prt_type" >
+                  <option>Father</option>
+                  <option>Mother</option>
+                  <option>Guardian</option>
+              </select> 
              </div>
              <div class="form-group">
               <label for="usr">First Name:</label>
-              <input type="text" class="form-control" id="usr" >
+              <input type="text" class="form-control" id="usr" ng-model="stud.newParentStruct.prt_fname">
              </div>
              <div class="form-group">
               <label for="usr">Last Name:</label>
-              <input type="text" class="form-control" id="usr" >
+              <input type="text" class="form-control" id="usr" ng-model="stud.newParentStruct.prt_lname">
              </div>
              <div class="form-group">
               <label for="usr">Phone:</label>
-              <input type="text" class="form-control" id="usr" >
+              <input type="text" class="form-control" id="usr" ng-model="stud.newParentStruct.prt_phone">
              </div>
              <div class="form-group">
               <label for="usr">Email:</label>
-              <input type="text" class="form-control" id="usr" >
+              <input type="text" class="form-control" id="usr" ng-model="stud.newParentStruct.prt_email">
              </div>
              <div class="form-group">
               <label for="usr">Parent Student Id(If any):</label>
-              <input type="text" class="form-control" id="usr" >
+              <select class="form-control" ng-model="stud.newParentStruct.studentParent.std_num" >
+                <option ng-repeat="option in stud.studentRecord" value="{{option.std_num}}">{{option.std_fname}} {{option.std_lname}}({{option.std_num}})</option>
+              </select>
              </div>
-             <button class="btn btn-primary" ng-click = "">Submit</button>
+             <button class="btn btn-primary" ng-click = "stud.updateStudentParentRecord()">Submit</button>
           </form>
          </div>
       </div>
@@ -637,21 +661,25 @@
           <form>
              <div class="form-group">
               <label for="usr">Student Id:</label>
-              <input type="text" class="form-control" id="usr" >
+              <input type="text" class="form-control" id="usr"  ng-model="stud.newClassAttendence.studentFee.std_num" disabled="true">
              </div>
              <div class="form-group">
               <label for="usr">Class Code:</label>
-              <input type="text" class="form-control" id="usr" >
+              <select class="form-control" ng-model="stud.newClassAttendence.classs.cls_code" ng-change="stud.apiCallToGetGeneralRecordsForClassSchedule(stud.newClassAttendence.classs.cls_code)">
+                <option ng-repeat="option in stud.classRecords" value="{{option.cls_code}}" >{{option.cls_description}}</option>
+              </select>
              </div>
              <div class="form-group">
               <label for="usr">Class Schedule:</label>
-              <input type="text" class="form-control" id="usr" >
+              <select class="form-control" ng-model="stud.newClassAttendence.classSch.sch_num" >
+                <option ng-repeat="option in stud.classSchRecords" value="{{option.sch_num}}" >{{option.sch_num}}</option>
+              </select>
              </div>
              <div class="form-group">
               <label for="usr">Attendence Date:</label>
-              <input type="text" class="form-control" id="usr" >
+              <input type="text" class="form-control" id="usr" ng-model="stud.newClassAttendence.att_date" placeholder="YYYY-MM-DD">
              </div>
-             <button class="btn btn-primary" ng-click = "">Submit</button>
+             <button class="btn btn-primary" ng-click = "stud.updateStudentAttendenceRecord()">Submit</button>
           </form>
          </div>
       </div>
@@ -664,21 +692,25 @@
           <form>
              <div class="form-group">
               <label for="usr">Student Id:</label>
-              <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_fname">
+              <input type="text" class="form-control" id="usr" ng-model="stud.newClassAchReq.student.std_num" disabled="true">
              </div>
              <div class="form-group">
               <label for="usr">Rank:</label>
-              <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_fname">
+              <select class="form-control" ng-model="stud.newClassAchReq.rank.rk_code" ng-change="stud.apiCallToGetGeneralRecordsForRankReq(stud.newClassAchReq.rank.rk_code)" >
+                <option ng-repeat="option in stud.rankRecords" value="{{option.rk_code}}" >{{option.rk_code}} - {{option.rk_name}}</option>
+              </select>
              </div>
              <div class="form-group">
               <label for="usr">Requirement:</label>
-              <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_fname">
+              <select class="form-control" ng-model="stud.newClassAchReq.rank_req.req_num" >
+                <option ng-repeat="option in stud.rankReqRecords" value="{{option.req_num}}" >{{option.req_description}}-{{option.req_num}}</option>
+              </select>
              </div>
              <div class="form-group">
               <label for="usr">Date of Achievement:</label>
-              <input type="text" class="form-control" id="usr" ng-model="stud.studentStruct.std_fname" placeholder="YYYY-MM-DD">
+              <input type="text" class="form-control" id="usr" ng-model="stud.newClassAchReq.dt_achieved" placeholder="YYYY-MM-DD">
              </div>
-             <button class="btn btn-primary" ng-click = "stud.UpdateStudent()">Submit</button>
+             <button class="btn btn-primary" ng-click = "stud.UpdateStudentRankReqRecord()">Submit</button>
           </form>
          </div>
       </div>
@@ -686,7 +718,7 @@
       <div ng-show="stud.recordNotInserted">
         <div style="margin-top: 100px;">
          <div class="alert alert-success" ng-show="stud.recInsertedSuccessfully">
-           <strong>Success!</strong> {{stud.alertMessage}} added successfully.
+           <strong>Success!</strong> {{stud.alertMessage}} successfully.
          </div>
          <div class="alert alert-danger" ng-hide="stud.recInsertedSuccessfully">
            <strong>Insertion Failed!</strong> Something went wrong. Please retry later.

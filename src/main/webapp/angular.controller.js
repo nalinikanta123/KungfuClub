@@ -2,7 +2,7 @@
 	var app= angular.module("Project2", []);
 
 	app.controller('studentSearch', function(getAllStudentRecord,submitStudentRecord,getRecordsByBelt
-		,getRecordsByRank,getRecordsByYear,getRecordsByCombo,submitExtraServices,getGeneralRecordsForForm){
+		,getRecordsByRank,getRecordsByYear,getRecordsByCombo,submitExtraServices,getGeneralRecordsForForm,updatedFormsServices){
 
 		var self=this;
 		self.searchType= "All";
@@ -10,6 +10,7 @@
 		var classRecords;
 		var rankRecords;
 		var rankReqRecords;
+		var classSchRecords;
 		self.pageTypeSearch=true;
 		self.recordNotInserted=false;
 		self.recInsertedSuccessfully=true;
@@ -29,6 +30,7 @@
 		self.showViewFullPage=false;
 		self.yearOptionSelected="=";
 		self.alertMessage="";
+		self.beltSearchType="";
 
 
 	//varibables to send data to backend
@@ -44,6 +46,7 @@
 		"std_address_city":"",
 		"std_address_prov":"",
 		"std_address_zipcode":"",
+		"status":"",
 		"rank": {
 				"rk_code" : "",
 				"rk_name": "",
@@ -103,6 +106,59 @@
 		}
 	};
 
+	//structure to hold fee
+	self.newFeeStruct={
+		"fee_description" : "",
+		"fee_date" : "",
+		"fee_value" : "",
+		"student":{
+			"std_num":""
+		}
+	};
+
+	//structure to hold parent
+	self.newParentStruct={
+		"prt_type" : "",
+		"prt_fname" : "",
+		"prt_lname" : "",
+		"prt_phone" : "",
+		"prt_email" : "",
+		"student" :{
+			"std_num" : ""
+		},
+		"studentParent" :{
+			"std_num" : ""
+		}
+	};
+
+	//structure to hold class attendence
+	self.newClassAttendence={
+		"att_date" : "",
+		"studentFee" : {
+			"std_num" : ""
+		},
+		"classs": {
+			"cls_code" : ""
+		},
+		"classSch": {
+			"sch_num" : ""
+		}
+	};
+
+	//structure to hold student rank req achieved
+	self.newClassAchReq={
+		"dt_achieved": "",
+		"student":{
+			"std_num": ""
+		},
+		"rank":{
+			"rk_code" :""
+		},
+		"rank_req":{
+			"req_num" :""
+		}
+	};
+
 	//********************initialise******************//
 	//initialise structure for next student insertion	
 	self.refreshData = 	function(){
@@ -117,6 +173,7 @@
 		self.studentStruct.std_address_city="";
 		self.studentStruct.std_address_prov="";
 		self.studentStruct.std_address_zipcode="";
+		self.studentStruct.status="";
 		self.studentStruct.rank.rk_code="";
 		self.studentStruct.rank.rk_name="";
 		self.studentStruct.rank.rk_belt_color="";
@@ -137,7 +194,7 @@
 		self.scheduleStruct.classs.cls_code="";
 		self.scheduleStruct.classs.cls_description="";
 		
-	};
+	}
 
 	self.refreshrankStruct=function(){
 		self.rankStruct.rk_code="";
@@ -156,8 +213,38 @@
 		self.newRankReq.req_num="";
 		self.newRankReq.req_description="";
 		self.newRankReq.rank.rk_code="";
-	};
+	}
 
+	self.refreshnewFeeStruct=function(){
+		self.newFeeStruct.fee_description="";
+		self.newFeeStruct.fee_date="";
+		self.newFeeStruct.fee_value="";
+		self.newFeeStruct.student.std_num="";
+	}
+
+	self.refreshnewParentStruct= function(){
+		self.newParentStruct.prt_type="";
+		self.newParentStruct.prt_fname="";
+		self.newParentStruct.prt_lname="";
+		self.newParentStruct.prt_phone="";
+		self.newParentStruct.prt_email="";
+		self.newParentStruct.student.std_num="";
+		self.newParentStruct.studentParent.std_num="";
+	}
+
+	self.refreshnewClassAttendence= function(){
+		self.newClassAttendence.att_date="";
+		self.newClassAttendence.studentFee.std_num="";
+		self.newClassAttendence.classs.cls_code="";
+		self.newClassAttendence.classSch.sch_num="";
+	}
+
+	self.refreshnewClassAchReq=function(){
+		self.newClassAchReq.dt_achieved="";
+		self.newClassAchReq.student.std_num="";
+		self.newClassAchReq.rank.rk_code="";
+		self.newClassAchReq.rank_req.req_num="";
+	}
 	
 	//******************functions to save data **************//
 	//function to save student record
@@ -235,8 +322,10 @@
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
 	}
-	self.viewAddFeePage=function(){
+	self.viewAddFeePage=function(data){
 		//console.log("Call recieved to show update page");
+		self.refreshnewFeeStruct();
+		self.newFeeStruct.student.std_num=data;
 		self.showUpdatePage=true;
 		self.showViewFullPage=false;
 		self.showEditStudPage=false;
@@ -246,8 +335,11 @@
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
 	}
-	self.viewAddParentPage=function(){
+	self.viewAddParentPage=function(data){
 		//console.log("Call recieved to show update page");
+		self.refreshnewParentStruct();
+		self.newParentStruct.student.std_num=data;
+		self.apiCall();
 		self.showUpdatePage=true;
 		self.showViewFullPage=false;
 		self.showEditStudPage=false;
@@ -256,9 +348,14 @@
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
+
 	}
-	self.viewAddClassAttPage=function(){
+	self.viewAddClassAttPage=function(data){
 		//console.log("Call recieved to show update page");
+		self.refreshnewClassAttendence();
+		self.classSchRecords="";
+		self.apiCallToGetGeneralRecordsForClass();
+		self.newClassAttendence.studentFee.std_num=data;
 		self.showUpdatePage=true;
 		self.showViewFullPage=false;
 		self.showEditStudPage=false;
@@ -268,8 +365,14 @@
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
 	}
-	self.viewAddRankReqCompPage=function(){
+	self.viewAddRankReqCompPage=function(data){
 		//console.log("Call recieved to show update page");
+		console.log("call to viewAddRankReqCompPage");
+		self.refreshnewClassAchReq();
+		self.newClassAchReq.student.std_num=data;
+		self.rankRecords="";
+		self.rankReqRecords="";
+		self.apiCallToGetGeneralRecordsForRank();
 		self.showUpdatePage=true;
 		self.showViewFullPage=false;
 		self.showEditStudPage=false;
@@ -287,8 +390,42 @@
 		self.apiCallToUpdateStudentInfo(self.studentStruct);
 		self.recordNotInserted=true;
 		self.showEditStudPage=false;
-
 	}
+
+	//update student fees record
+	self.updateStudentFeeRecord =  function(){
+		console.log("Got the call to updateStudentFeeRecord");
+		self.apiCallToUpdateStudentFeeInfo(self.newFeeStruct);
+		self.recordNotInserted=true;
+		self.showAddFeePage=false;
+	}
+
+	//update student parent records
+	self.updateStudentParentRecord =  function(){
+		console.log("Got the call to updateStudentParentRecord");
+		self.apiCallToUpdateStudentParentInfo(self.newParentStruct);
+		self.recordNotInserted=true;
+		self.showAddParentPage=false;
+	}
+
+	//update student attendence records
+	self.updateStudentAttendenceRecord =  function(){
+		console.log("Got the call to updateStudentAttendenceRecord");
+		self.apiCallToUpdateStudentAttendenceInfo(self.newClassAttendence);
+		self.recordNotInserted=true;
+		self.showAddClassAttPage=false;
+	}
+
+	//update student 
+	self.UpdateStudentRankReqRecord=function(){
+		console.log("Got the call to UpdateStudentRankReqRecord");
+		console.log("Data**********" + self.newClassAchReq.dt_achieved);
+		self.apiCallToUpdateStudentRankReqInfo(self.newClassAchReq);
+		self.recordNotInserted=true;
+		self.showAddRankReqCompPage=false;
+	}
+
+
 	//*************End of Update function calls
 
 
@@ -318,6 +455,7 @@
 			self.showStudentResult=false;
 			self.studentRecord="";
 			self.yearOptionSelected="=";
+			self.beltSearchType="";
 			self.refreshData();
 		}
 		else if(data == 'Rank'){
@@ -354,6 +492,7 @@
 			self.isSearchByYear=false;
 			self.showStudentResult=false;
 			self.studentRecord="";
+			self.beltSearchType="";
 			self.refreshData();
 		}
 	}
@@ -369,6 +508,7 @@
 			self.addRankPage=false;
 			self.addRankReqPage=false;
 			self.addPageSelected=false;
+			self.refreshData();
 		}
 		else {
 			self.refreshData();
@@ -500,8 +640,8 @@
 	self.apiCall=function(){
 		getAllStudentRecord.getRecords(self.searchType)
 		.then(function(data){
-			console.log(data);
 			self.studentRecord =data;
+			console.log("studentRecord" + data);
 		})
 	}
 	
@@ -518,8 +658,8 @@
 	self.apiCallToGetStudByBelt=function(arg1){
 		getRecordsByBelt.getRecords(arg1)
 		.then(function(data){
-			console.log(data);
 			self.studentRecord =data;
+			console.log( "studentRecord" + self.studentRecord);
 		})
 	}
 
@@ -584,6 +724,18 @@
 		.then(function(data){
 			console.log(data);
 			self.rankReqRecords =data;
+		})
+	}
+
+	
+	//get class schedule
+	self.apiCallToGetGeneralRecordsForClassSchedule=function(data){
+		console.log("call to apiCallToGetGeneralRecordsForClassSchedule recieved");
+		console.log("data = "+ data);
+		getGeneralRecordsForForm.getClassSchedule(data)
+		.then(function(data){
+			console.log(data);
+			self.classSchRecords =data;
 		})
 	}
 
@@ -663,20 +815,73 @@
 	}
 
 
+	//API to update student record
 	self.apiCallToUpdateStudentInfo=function(arg1){
-
-		self.alertMessage="Rank Requirement";
-		self.recInsertedSuccessfully=true;
-		// submitExtraServices.saveRankReq(arg1)
-		// .then(function (argument) {
-		// 	console.log("Success");
-		// 	self.alertMessage="Rank Requirement";
-		// 	self.recInsertedSuccessfully=true;
-		// },function (argument){
-		// 	console.log("Failure");
-		// 	self.recInsertedSuccessfully=false;
-		// });
+		updatedFormsServices.updateStudent(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.alertMessage="Student updated";
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
 	}
+
+	//API to update student fee record
+	self.apiCallToUpdateStudentFeeInfo=function(arg1){
+		updatedFormsServices.updateStudentFee(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.alertMessage="Student Fee added";
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
+	}
+
+	
+	//API to update student Parent record
+	self.apiCallToUpdateStudentParentInfo=function(arg1){
+		updatedFormsServices.updateStudentParent(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.alertMessage="Parent added";
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
+	}
+
+	
+	//API to update student Attendence record
+	self.apiCallToUpdateStudentAttendenceInfo=function(arg1){
+		updatedFormsServices.updateStudentAttendence(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.alertMessage="Student Attendence added";
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
+	}
+	
+	//API to update student Rank Req record
+	self.apiCallToUpdateStudentRankReqInfo=function(arg1){
+		updatedFormsServices.updateStudentRankReqAch(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.alertMessage="Student Rank Achieved updated";
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
+	}
+
 
 });
 

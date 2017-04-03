@@ -9,6 +9,7 @@ app.service("getRecordsByYear",getRecordsByYear);
 app.service("getRecordsByCombo",getRecordsByCombo);
 app.service("submitExtraServices",submitExtraServices);
 app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
+app.service("updatedFormsServices",updatedFormsServices);
 	
 
 	// Api get all records
@@ -123,6 +124,8 @@ app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 	//General API calls to fetch data for forms.
 	function getGeneralRecordsForForm($http){
 		var self = this;
+
+		//get all class records
 		self.getClassRecords= function(){
 			console.log("inside getClassRecords service");
 			var p1= $http.get('http://localhost:8080/class/');
@@ -133,9 +136,20 @@ app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 			return p2;
 		}
 
+		//get all schedule for classes
+		self.getClassSchedule=function(data){
+			console.log("inside getClassSchedule service");
+			var p1= $http.get('http://localhost:8080/classSchedule/'+data);
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
 		//get all rank info
 		self.getRankRecords= function(){
-			console.log("inside getRankRecords service");
+			console.log("inside getRankRecords service with data");
 			var p1= $http.get('http://localhost:8080/rank/');
 			var p2= p1.then(function (response){
 				console.log(response.data);
@@ -144,7 +158,16 @@ app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 			return p2;
 		}
 
-		//get rank req info
+		//get rank req
+		self.getRankReqRecords= function(data){
+			console.log("inside getRankReqRecords service with data" + data);
+			var p1= $http.get('http://localhost:8080/rankReq/'+ data);
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
 
 		//get one student info
 		self.getOneStudentRecord= function(data){
@@ -180,6 +203,73 @@ app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 			});
 			return promise2;
 		}
+	}
+
+	//API to hold all update pages call
+	function updatedFormsServices($http){
+		var self=this;	
+
+		//update student record
+		self.updateStudent = function(data){
+			self.local=data;
+			console.log("Object recieved self.local" + self.local.std_num);
+			var promise1 = $http.put("http://localhost:8080/student/"+self.local.std_num,self.local);
+			var promise2 = promise1.then(function (response) {
+					console.log("Respone = " + response.data);
+					return response.data;
+			});
+			return promise2;
+		}
+
+		//update student Fee record
+		self.updateStudentFee = function(data){
+			self.local=data;
+			console.log("Object recieved self.local" + self.local);
+			var promise1 = $http.post("http://localhost:8080/fee/",self.local);
+			var promise2 = promise1.then(function (response) {
+					console.log("Respone = " + response.data);
+					return response.data;
+			});
+			return promise2;
+		}
+		
+		//update student Parent record
+		self.updateStudentParent = function(data){
+			self.local=data;
+			console.log("Object recieved self.local" + self.local);
+			var promise1 = $http.post("http://localhost:8080/parent/",self.local);
+			var promise2 = promise1.then(function (response) {
+					console.log("Respone = " + response.data);
+					return response.data;
+			});
+			return promise2;
+		}
+
+		//update student Attendence record
+		self.updateStudentAttendence = function(data){
+			self.local=data;
+			console.log("Object recieved self.local" + self.local);
+			var promise1 = $http.post("http://localhost:8080/classAttendance/",self.local);
+			var promise2 = promise1.then(function (response) {
+					console.log("Respone = " + response.data);
+					return response.data;
+			});
+			return promise2;
+		}
+
+		//update student Rank Achived record
+		self.updateStudentRankReqAch = function(data){
+			self.local=data;
+			console.log("Object recieved self.local" + self.local);
+			var promise1 = $http.post("http://localhost:8080/rankReqHist/",self.local);
+			var promise2 = promise1.then(function (response) {
+					console.log("Respone = " + response.data);
+					return response.data;
+			});
+			return promise2;
+		}
+
+
 	}
 
 	//API to submit general data
@@ -237,6 +327,7 @@ app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 			});
 			return promise2;
 		}
+
 
 	}
 

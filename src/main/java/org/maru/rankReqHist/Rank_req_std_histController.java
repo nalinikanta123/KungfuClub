@@ -28,6 +28,9 @@ public class Rank_req_std_histController {
 	@RequestMapping(value = "/rankReqHist", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public void addRankReqHist(@RequestBody Rank_req_std_hist rankReqHist) {
 		System.out.println("RankReqHist Date recieved= " + rankReqHist.dt_achieved);
+		System.out.println("RankReqHist Student recieved= " + rankReqHist.getStudent().std_num);
+		System.out.println("RankReqHist Rank recieved= " + rankReqHist.getRank().getRk_code());
+		System.out.println("RankReqHist RankReq recieved= " + rankReqHist.getRank_req().getReq_num());
 		rankReqHistService.addRankReqHist(rankReqHist);
 	}
 

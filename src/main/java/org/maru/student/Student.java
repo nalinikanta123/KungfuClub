@@ -36,6 +36,7 @@ public class Student {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone="EST")
 	public Date std_date_enroll;
 	public long std_phone;
+	public String status;
 	public String std_email;
 	public String std_address_line1;
 	public String std_address_line2;
@@ -46,14 +47,18 @@ public class Student {
 	@JoinColumn(name="rk_code")
 	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@stdNum")
 	public Rank rank;
-	
-//	@OneToMany(mappedBy="studentFee",fetch=FetchType.EAGER)
-//	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@stdNum2") // V.IMP for object to JSON conversion
-//	public Collection<Fee> fee = new ArrayList<>();
-	
+
 	//Getter and Setters
+	
+	
 	public int getStd_num() {
 		return std_num;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public void setStd_num(int std_num) {
 		this.std_num = std_num;

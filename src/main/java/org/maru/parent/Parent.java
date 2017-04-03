@@ -51,7 +51,7 @@ public class Parent {
 
 	String prt_fname;
 	String prt_lname;
-	int prt_phone;
+	long prt_phone;
 	String prt_email;
 	
 	@ManyToOne()
@@ -113,11 +113,11 @@ public class Parent {
 		this.prt_lname = prt_lname;
 	}
 
-	public int getPrt_phone() {
+	public long getPrt_phone() {
 		return prt_phone;
 	}
 
-	public void setPrt_phone(int prt_phone) {
+	public void setPrt_phone(long prt_phone) {
 		this.prt_phone = prt_phone;
 	}
 

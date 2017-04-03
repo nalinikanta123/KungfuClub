@@ -29,8 +29,12 @@ public class ParentController {
 	public void addRank(@RequestBody Parent parent) {
 		System.out.println("Parent Fname recieved = " + parent.prt_fname);
 		System.out.println("Parent Lname recieved = " + parent.prt_lname);
-		System.out.println("Parent Lname recieved = " + parent.getStudent().std_num);
-		System.out.println("Parent Lname recieved = " + parent.getStudentParent().std_num);
+		System.out.println("Student num recieved = " + parent.getStudent().std_num);
+		System.out.println("Parent num recieved = " + parent.getStudentParent().std_num);
+		System.out.println("phone =" + parent.prt_phone);
+		if(parent.getStudentParent().std_num==0){
+			parent.setStudentParent(null);
+		}
 		System.out.println("Setting the correct values");
 		System.out.println("Calling add parent call\n");
 		parentService.addParent(parent);
