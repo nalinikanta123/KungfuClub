@@ -15,12 +15,25 @@ app.service("updatedFormsServices",updatedFormsServices);
 	// Api get all records
 	function getAllStudentRecord($http){
 
+		//get all student
 		var self = this;
 		self.getRecords= function(data){
 			console.log("inside service");
 			console.log(data);
 			
 			var p1= $http.get('http://localhost:8080/student');
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
+		//get all active students
+		var self = this;
+		self.getActRecords= function(){
+			console.log("call to get active student");
+			var p1= $http.get('http://localhost:8080/student/status/active');
 			var p2= p1.then(function (response){
 				console.log(response.data);
 				return response.data;
@@ -180,6 +193,27 @@ app.service("updatedFormsServices",updatedFormsServices);
 			return p2;
 		}
 
+		//get all rank number occupied by students
+		self.getUniqueRank= function(){
+			console.log("inside getUniqueRank service");
+			var p1= $http.get('http://localhost:8080/student/activeRank');
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
+		//get all rank belts occupied by students
+		self.getUniqueRankBelt= function(){
+			console.log("inside getUniqueRank service");
+			var p1= $http.get('http://localhost:8080/student/activeRankBelt');
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
 
 	}
 

@@ -104,16 +104,17 @@ public class StudentController {
 		return studentService.getStudentByYearGt(id);
 	}
 
-	// 7. Get Student by belt
+	// 9. Get Student by belt
 	@RequestMapping(value = "/student/yearLt/{id}", method = RequestMethod.GET)
 	public List<Student> getStudentByYearLt(@PathVariable int id) {
 		System.out.println("year recieved = " + id);
 		return studentService.getStudentByYearLt(id);
 	}
 
-	// 8. Get combined table result (belt,year)
+	// 10. Get combined table result (belt,year)
 	@RequestMapping(value = "/student/combo/{belt}/{year}/{mode}", method = RequestMethod.GET)
-	public List<Student> getStudentByCombo(@PathVariable String belt, @PathVariable int year, @PathVariable String mode) {
+	public List<Student> getStudentByCombo(@PathVariable String belt, @PathVariable int year,
+			@PathVariable String mode) {
 		System.out.println("belt = " + belt);
 		System.out.println("year = " + year);
 		System.out.println("mode = " + mode);
@@ -131,15 +132,33 @@ public class StudentController {
 			System.out.println("inside = call");
 			studByYear = studentService.getStudentByYear(year);
 		}
-		
-		for(int i=0; i < studByBelt.size(); i++){
-			for (int j=0; j <studByYear.size(); j++){
-				if(studByBelt.get(i).std_num==studByYear.get(j).std_num){
+
+		for (int i = 0; i < studByBelt.size(); i++) {
+			for (int j = 0; j < studByYear.size(); j++) {
+				if (studByBelt.get(i).std_num == studByYear.get(j).std_num) {
 					studByCombo.add(studByBelt.get(i));
 				}
 			}
 		}
-		
+
 		return studByCombo;
+	}
+
+	// 11. Get all student by status
+	@RequestMapping("/student/status/{id}")
+	public List<Student> getStudentByStatus(@PathVariable String id) {
+		return studentService.getStudentByStatus(id);
+	}
+
+	// 12.Get all active ranks belts
+	@RequestMapping("/student/activeRankBelt")
+	public List<String> getUniqueRankBelt() {
+		return studentService.getUniqueRankBelt();
+	}
+
+	// 13.Get all active ranks
+	@RequestMapping("/student/activeRank")
+	public List<Integer> getUniqueRank() {
+		return studentService.getUniqueRank();
 	}
 }

@@ -109,5 +109,25 @@ public class StudentService {
 		return student;
 	}
 	
+	//10. get all active student
+	public List<Student> getStudentByStatus(String status) {
+		List<Student> student = new ArrayList<Student>();
+		studentRepository.getByStatus(status).forEach(student::add);
+		return student;
+	}
+	
+	//11. get all active ranks belt
+	public List<String> getUniqueRankBelt(){
+		List<String> ranks = new ArrayList<String>();
+		studentRepository.getUniqueRankBelt().forEach(ranks::add);
+		return ranks;
+	}
+	
+	//11. get all active ranks
+	public List<Integer> getUniqueRank(){
+		List<Integer> ranks = new ArrayList<Integer>();
+		studentRepository.getUniqueRank().forEach(ranks::add);
+		return ranks;
+	}
 
 }

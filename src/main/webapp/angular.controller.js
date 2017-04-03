@@ -11,6 +11,7 @@
 		var rankRecords;
 		var rankReqRecords;
 		var classSchRecords;
+		var uniqueRankRecords;
 		self.pageTypeSearch=true;
 		self.recordNotInserted=false;
 		self.recInsertedSuccessfully=true;
@@ -313,6 +314,7 @@
 	self.viewFullEditStudPage=function(data){
 		//console.log("Call recieved to show update page");
 		self.apiCallToGetGeneralRecordsForOneStudent(data);
+		self.apiCallToGetGeneralRecordsForRank();
 		self.showUpdatePage=true;
 		self.showViewFullPage=false;
 		self.showEditStudPage=true;
@@ -444,6 +446,19 @@
 			self.studentRecord="";
 			self.apiCall();	
 		}
+		else if(data == 'Active'){
+			self.searchType= "All";	
+			//unset the fields
+			self.isSearchByBelts=false;
+			self.searchByCatgory=false;
+			self.isSearchByCombo=false;
+			self.isSearchByRank=false;
+			self.isSearchByYear=false;
+			self.showStudentResult=true;
+			self.refreshData();
+			self.studentRecord="";
+			self.apiCallToGetActStud();
+		}
 		else if(data == 'Combo'){
 			self.searchType= "Combo";
 			//unset the fields
@@ -456,7 +471,9 @@
 			self.studentRecord="";
 			self.yearOptionSelected="=";
 			self.beltSearchType="";
+			self.uniqueRankRecords="";
 			self.refreshData();
+			self.apiCallToGetGeneralRecordsForActiveRankBelt();
 		}
 		else if(data == 'Rank'){
 			self.searchType= "By Rank";
@@ -468,7 +485,9 @@
 			self.isSearchByYear=false;
 			self.showStudentResult=false;
 			self.studentRecord="";
+			self.uniqueRankRecords="";
 			self.refreshData();
+			self.apiCallToGetGeneralRecordsForActiveRankNumber();
 		}
 		else if(data == 'Year'){
 			self.searchType= "By Year";
@@ -493,7 +512,9 @@
 			self.showStudentResult=false;
 			self.studentRecord="";
 			self.beltSearchType="";
+			self.uniqueRankRecords="";
 			self.refreshData();
+			self.apiCallToGetGeneralRecordsForActiveRankBelt();
 		}
 	}
 	self.changePage=function(data){
@@ -644,6 +665,15 @@
 			console.log("studentRecord" + data);
 		})
 	}
+
+	//Api call to get all active student
+	self.apiCallToGetActStud=function(){
+		getAllStudentRecord.getActRecords(self.searchType)
+		.then(function(data){
+			self.studentRecord =data;
+			console.log("studentRecord" + data);
+		})
+	}
 	
 	//Api call to get all by rank 
 	self.apiCallToGetStudByRank=function(arg1){
@@ -718,6 +748,7 @@
 		})
 	}
 
+
 	//get rank req
 	self.apiCallToGetGeneralRecordsForRankReq=function(data){
 		getGeneralRecordsForForm.getRankReqRecords(data)
@@ -745,6 +776,24 @@
 		.then(function(data){
 			console.log(data);
 			self.studentStruct =data;
+		})
+	}
+
+	//get all rank number occupied by students 
+	self.apiCallToGetGeneralRecordsForActiveRankNumber=function(){
+		getGeneralRecordsForForm.getUniqueRank()
+		.then(function(data){
+			console.log(data);
+			self.uniqueRankRecords =data;
+		})
+	}
+	
+	//get all rank belts occupied by students getUniqueRankBelt
+	self.apiCallToGetGeneralRecordsForActiveRankBelt=function(){
+		getGeneralRecordsForForm.getUniqueRankBelt()
+		.then(function(data){
+			console.log(data);
+			self.uniqueRankRecords =data;
 		})
 	}
 

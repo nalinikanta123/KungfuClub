@@ -45,6 +45,11 @@
           </button>
         </div>
         <div class="btn-group">
+          <button type="button" class="btn btn-primary" ng-click="stud.searchCall('Active')">
+            Active
+          </button>
+        </div>
+        <div class="btn-group">
           <button type="button" class="btn btn-primary" ng-click="stud.searchCall('Rank')">
             By Rank
           </button>
@@ -79,11 +84,8 @@
       <div class="col-sm-3" ng-show="stud.isSearchByBelts">
         <div class="form-group" >
           <label for="belts">Belt:</label>
-          <select class="form-control" id="belts" ng-model="stud.beltSearchType" style="width: 200px">
-            <option>white</option>
-            <option>black</option>
-            <option>yellow</option>
-            <option>red</option>
+          <select class="form-control" ng-model="stud.beltSearchType" >
+                <option ng-repeat="option in stud.uniqueRankRecords" value="{{option}}" >{{option}}</option>
           </select> 
         </div>
       </div> 
@@ -97,7 +99,9 @@
           <div class="form-group" >
             <label for="rank">Rank:</label><br>
             <div class="input-group">
-              <input type="text" class="form-control" aria-describedby="basic-addon1" style="width: 200px" ng-model="stud.studentStruct.rank.rk_code">
+              <select class="form-control" ng-model="stud.studentStruct.rank.rk_code" style="width: 175px">
+                <option ng-repeat="option in stud.uniqueRankRecords" value="{{option}}" >{{option}}</option>
+              </select> 
             </div>
           </div>
         </div>
@@ -134,12 +138,9 @@
       <div class="col-sm-3">
         <div class="form-group" >
           <label for="belts">Belt:</label>
-          <select class="form-control" id="belts" ng-model="stud.beltSearchType" style="width: 200px">
-            <option>white</option>
-            <option>black</option>
-            <option>yellow</option>
-            <option>red</option>
-          </select> 
+          <select class="form-control" ng-model="stud.beltSearchType" style="width: 175px">
+                <option ng-repeat="option in stud.uniqueRankRecords" value="{{option}}" >{{option}}</option>
+          </select>  
         </div>
       </div> 
       <!-- Not required as rank and belt are 1-1 mapped
@@ -574,7 +575,7 @@
              </div>
              <div class="form-group" >
               <label for="usr">Rank Code:</label>
-              <input type="text" class="form-control" id="usr"  ng-model="stud.studentStruct.rank.rk_code">
+              <input type="text" class="form-control" id="usr"  ng-model="stud.studentStruct.rank.rk_code" >
              </div>
              <button class="btn btn-primary" ng-click = "stud.updateStudentInfo()">Submit</button>
           </form>
