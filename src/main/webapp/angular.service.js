@@ -143,6 +143,21 @@ app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 			});
 			return p2;
 		}
+
+		//get rank req info
+
+		//get one student info
+		self.getOneStudentRecord= function(data){
+			console.log("inside getOneStudentRecord service");
+			var p1= $http.get('http://localhost:8080/student/'+data);
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
+
 	}
 
 
@@ -211,7 +226,7 @@ app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 		}
 
 		//save rank req
-		self.saveRankReq= function(data){
+		self.apiCallToSaveRankReq= function(data){
 			self.local=data;
 			console.log("inside save Rank");
 			console.log(self.local);

@@ -197,6 +197,8 @@
 		self.addRankReqPage=false;
 	}
 
+	
+
 	//************UPDATE CALLS*************//
 	self.showSearchPage=function(){
 		//console.log("Call recieved to show search page");
@@ -207,9 +209,11 @@
 		self.showAddParentPage=false;
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
 	}
-	self.viewFullInfoPage=function(){
+	self.viewFullInfoPage=function(data){
 		//console.log("Call recieved to show update page");
+		self.apiCallToGetGeneralRecordsForOneStudent(data);
 		self.showUpdatePage=true;
 		self.showViewFullPage=true;
 		self.showEditStudPage=false;
@@ -217,9 +221,11 @@
 		self.showAddParentPage=false;
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
 	}
-	self.viewFullEditStudPage=function(){
+	self.viewFullEditStudPage=function(data){
 		//console.log("Call recieved to show update page");
+		self.apiCallToGetGeneralRecordsForOneStudent(data);
 		self.showUpdatePage=true;
 		self.showViewFullPage=false;
 		self.showEditStudPage=true;
@@ -227,6 +233,7 @@
 		self.showAddParentPage=false;
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
 	}
 	self.viewAddFeePage=function(){
 		//console.log("Call recieved to show update page");
@@ -237,6 +244,7 @@
 		self.showAddParentPage=false;
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
 	}
 	self.viewAddParentPage=function(){
 		//console.log("Call recieved to show update page");
@@ -247,6 +255,7 @@
 		self.showAddParentPage=true;
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
 	}
 	self.viewAddClassAttPage=function(){
 		//console.log("Call recieved to show update page");
@@ -257,6 +266,7 @@
 		self.showAddParentPage=false;
 		self.showAddClassAttPage=true;
 		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
 	}
 	self.viewAddRankReqCompPage=function(){
 		//console.log("Call recieved to show update page");
@@ -267,6 +277,17 @@
 		self.showAddParentPage=false;
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=true;
+		self.recordNotInserted=false;
+	}
+
+
+	//function to Update student record
+	self.updateStudentInfo = function(){
+		console.log("Got the call");
+		self.apiCallToUpdateStudentInfo(self.studentStruct);
+		self.recordNotInserted=true;
+		self.showEditStudPage=false;
+
 	}
 	//*************End of Update function calls
 
@@ -548,6 +569,7 @@
 	}
 
 
+	//API to get all rank
 	self.apiCallToGetGeneralRecordsForRank=function(){
 		getGeneralRecordsForForm.getRankRecords()
 		.then(function(data){
@@ -565,6 +587,14 @@
 		})
 	}
 
+	//get only one student
+	self.apiCallToGetGeneralRecordsForOneStudent=function(data){
+		getGeneralRecordsForForm.getOneStudentRecord(data)
+		.then(function(data){
+			console.log(data);
+			self.studentStruct =data;
+		})
+	}
 
 	//*******************SAVE API Calls**************//
 	//API to save Student information
@@ -632,6 +662,21 @@
 		});
 	}
 
+
+	self.apiCallToUpdateStudentInfo=function(arg1){
+
+		self.alertMessage="Rank Requirement";
+		self.recInsertedSuccessfully=true;
+		// submitExtraServices.saveRankReq(arg1)
+		// .then(function (argument) {
+		// 	console.log("Success");
+		// 	self.alertMessage="Rank Requirement";
+		// 	self.recInsertedSuccessfully=true;
+		// },function (argument){
+		// 	console.log("Failure");
+		// 	self.recInsertedSuccessfully=false;
+		// });
+	}
 
 });
 
