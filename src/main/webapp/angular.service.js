@@ -7,6 +7,7 @@ app.service("getRecordsByBelt",getRecordsByBelt);
 app.service("getRecordsByRank",getRecordsByRank);
 app.service("getRecordsByYear",getRecordsByYear);
 app.service("getRecordsByCombo",getRecordsByCombo);
+app.service("submitExtraServices",submitExtraServices);
 	
 
 	// Api get all records
@@ -139,4 +140,22 @@ app.service("getRecordsByCombo",getRecordsByCombo);
 			return promise2;
 		}
 	}
+
+	//API to submit general data
+	function submitExtraServices($http){
+		var self=this;	
+		self.saveClass = function(data){
+			self.local=data;
+			console.log("inside submitExtraServices");
+			console.log(self.local);
+			var promise1 = $http.post("http://localhost:8080/class",self.local);
+			var promise2 = promise1.then(function (response) {
+					console.log("Respone = " + response.data);
+					return response.data;
+			});
+			return promise2;
+		}
+	}
+
+
 })();

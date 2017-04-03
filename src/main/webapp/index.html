@@ -341,10 +341,14 @@
       </div>
        <div class="form-group">
           <label for="usr">Class Level:</label>
-          <input type="text" class="form-control" id="usr"  ng-model="stud.classStruct.cls_level">
+           <select class="form-control" id="belts" ng-model="stud.classStruct.cls_level" >
+              <option selected>beginner</option>
+              <option>experienced</option>
+              <option>advanced</option>
+            </select> 
       </div>
       <div class="form-group" style="display: none;">
-          <input type="text" class="form-control" id="usr" value="86"  ng-model="stud.classStruct.instructor.ins_number">
+          <input type="text" class="form-control" id="usr"  ng-model="stud.classStruct.instructor.ins_number">
       </div>
       <button class="btn btn-primary" ng-click = "stud.saveClass()">Submit</button>
     </div>

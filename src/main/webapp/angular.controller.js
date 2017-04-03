@@ -2,7 +2,7 @@
 	var app= angular.module("Project2", []);
 
 	app.controller('studentSearch', function(getAllStudentRecord,submitStudentRecord,getRecordsByBelt
-		,getRecordsByRank,getRecordsByYear,getRecordsByCombo){
+		,getRecordsByRank,getRecordsByYear,getRecordsByCombo,submitExtraServices){
 
 		var self=this;
 		self.searchType= "All";
@@ -89,6 +89,7 @@
 		}
 	};
 
+	//********************initialise******************//
 	//initialise structure for next student insertion	
 	self.refreshData = 	function(){
 		self.studentStruct.std_fname = "";
@@ -107,6 +108,13 @@
 		self.studentStruct.rank.rk_belt_color="";
 	}
 
+	//initialise structure for next student insertion	
+	self.refreshClassData = function(){
+		self.classStruct.cls_description = "";
+		self.classStruct.cls_level="";
+		self.classStruct.instructor.ins_number="";
+	}
+
 	//******************functions to save data **************//
 	//function to save student record
 	self.saveStudent = function(){
@@ -114,18 +122,17 @@
 		console.log(self.studentStruct);
 		self.recordNotInserted=true;
 		self.addStudentPage=false;
-		submitStudentRecord.saveRecord(self.studentStruct)
-		.then(function (argument) {
-			console.log("Success");
-			self.recInsertedSuccessfully=true;
-		},function (argument){
-			console.log("Failure");
-			self.recInsertedSuccessfully=false;
-		});
+		self.apiCallToSaveStudent(self.studentStruct);
+		//self.refreshData();
 	}
 	//function to save class record
 	self.saveClass = function(){
-		
+		console.log(self.classStruct);
+		self.apiCallToSaveClass(self.classStruct);
+		self.recordNotInserted=true;
+		self.addClassPage=false;
+		//flush the data
+		//self.refreshClassData();
 	}
 	//function to save Schedule record
 	self.saveSchedule = function(){
@@ -316,6 +323,7 @@
 			self.addRankPage=false;
 			self.addRankReqPage=false;
 			self.addPageSelected=true;
+			self.refreshData();
 		}
 		else if(data == 'Class'){
 			self.recordNotInserted=false;
@@ -325,6 +333,7 @@
 			self.addRankPage=false;
 			self.addRankReqPage=false;
 			self.addPageSelected=true;
+			self.refreshClassData();
 		}
 		else if(data == 'Schedule'){
 			self.recordNotInserted=false;
@@ -334,6 +343,7 @@
 			self.addRankPage=false;
 			self.addRankReqPage=false;
 			self.addPageSelected=true;
+
 		}
 		else if(data == 'Rank'){
 			self.recordNotInserted=false;
@@ -468,6 +478,30 @@
 			console.log(data);
 			self.studentRecord =data;
 		})
+	}
+
+	//API to save Student information
+	self.apiCallToSaveStudent=function(arg1){
+		submitStudentRecord.saveRecord(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
+	}
+
+	//Api call to save Class info
+	self.apiCallToSaveClass=function(arg1){
+		submitExtraServices.saveClass(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
 	}
 
 

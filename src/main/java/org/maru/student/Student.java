@@ -35,7 +35,7 @@ public class Student {
 	public Date std_dob;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone="EST")
 	public Date std_date_enroll;
-	public int std_phone;
+	public long std_phone;
 	public String std_email;
 	public String std_address_line1;
 	public String std_address_line2;
@@ -82,10 +82,10 @@ public class Student {
 	public void setStd_date_enroll(Date std_date_enroll) {
 		this.std_date_enroll = std_date_enroll;
 	}
-	public int getStd_phone() {
+	public long getStd_phone() {
 		return std_phone;
 	}
-	public void setStd_phone(int std_phone) {
+	public void setStd_phone(long std_phone) {
 		this.std_phone = std_phone;
 	}
 	public String getStd_email() {

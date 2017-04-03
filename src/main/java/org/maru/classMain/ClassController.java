@@ -3,6 +3,8 @@ package org.maru.classMain;
 import java.util.List;
 
 import org.maru.Topic.Topic;
+import org.maru.instructor.Instructor;
+import org.maru.instructor.InstructorService;
 import org.maru.student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,6 +18,8 @@ public class ClassController {
 
 	@Autowired
 	public ClassService classService;
+	@Autowired
+	public InstructorService instructorService;
 	
 	// 1. Get all Class records
 		@RequestMapping("/class")
@@ -28,6 +32,15 @@ public class ClassController {
 		public void addClass(@RequestBody Class classObj) {
 			System.out.println("Class Desc recieved = " +classObj.cls_description);
 			System.out.println("Class Level recieved = " +classObj.cls_level);
+			System.out.println("Class Level recieved = " +classObj.instructor.getIns_number());
+			if(classObj.instructor.getIns_number() == 0){
+				//System.out.println("Hello");
+				List<Instructor> inst=instructorService.getAllInstructor();
+				if(inst.size()>0){
+					System.out.println(inst.get(0).getIns_number());
+					classObj.instructor.setIns_number(inst.get(0).getIns_number());
+				}
+			}
 			classService.addClass(classObj);
 		}
 	
