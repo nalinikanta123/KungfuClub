@@ -8,6 +8,7 @@ app.service("getRecordsByRank",getRecordsByRank);
 app.service("getRecordsByYear",getRecordsByYear);
 app.service("getRecordsByCombo",getRecordsByCombo);
 app.service("submitExtraServices",submitExtraServices);
+app.service("getGeneralRecordsForForm",getGeneralRecordsForForm);
 	
 
 	// Api get all records
@@ -119,6 +120,20 @@ app.service("submitExtraServices",submitExtraServices);
 		}
 	}
 
+	//General API calls to fetch data for forms.
+	function getGeneralRecordsForForm($http){
+		var self = this;
+		self.getClassRecords= function(){
+			console.log("inside getClassRecords service");
+			var p1= $http.get('http://localhost:8080/class/');
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+	}
+
 
 	//API to submit student record
 	function submitStudentRecord($http){
@@ -143,7 +158,9 @@ app.service("submitExtraServices",submitExtraServices);
 
 	//API to submit general data
 	function submitExtraServices($http){
-		var self=this;	
+		var self=this;
+
+		//save class record	
 		self.saveClass = function(data){
 			self.local=data;
 			console.log("inside submitExtraServices");
@@ -155,6 +172,20 @@ app.service("submitExtraServices",submitExtraServices);
 			});
 			return promise2;
 		}
+
+		//save class class schedule
+		self.saveClassSchedule = function(data){
+			self.local=data;
+			console.log("inside save class schedule");
+			console.log(self.local);
+			var promise1 = $http.post("http://localhost:8080/classSchedule",self.local);
+			var promise2 = promise1.then(function (response) {
+					console.log("Respone = " + response.data);
+					return response.data;
+			});
+			return promise2;
+		}
+
 	}
 
 

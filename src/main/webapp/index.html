@@ -359,8 +359,10 @@
     <h3 style="text-align: center;">Class Schedule Form</h3>
        <!--Add the drop down here-->
        <div class="form-group">
-          <label for="usr">Class Name:</label>
-          <input type="text" class="form-control" id="usr"  ng-model="stud.scheduleStruct.sch_dayweek" >
+          <label for="usr">Class Name:</label><br/>
+          <select class="form-control" ng-model="stud.scheduleStruct.classs.cls_code" >
+            <option ng-repeat="option in stud.classRecords" value="{{option.cls_code}}">{{option.cls_description}}</option>
+          </select>
       </div>
       <div class="form-group">
           <label for="usr">Day of Week:</label>

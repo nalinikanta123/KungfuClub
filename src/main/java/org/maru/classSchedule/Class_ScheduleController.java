@@ -29,6 +29,7 @@ public class Class_ScheduleController {
 			System.out.println("Class Day recieved = " +classSch.sch_dayweek);
 			System.out.println("Class Start recieved = " +classSch.start_time);
 			System.out.println("Class End recieved = " +classSch.end_time);
+			System.out.println("Class End recieved = " +classSch.getClass());
 			classSchService.addClassSchedule(classSch);
 		}
 	

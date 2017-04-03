@@ -2,11 +2,12 @@
 	var app= angular.module("Project2", []);
 
 	app.controller('studentSearch', function(getAllStudentRecord,submitStudentRecord,getRecordsByBelt
-		,getRecordsByRank,getRecordsByYear,getRecordsByCombo,submitExtraServices){
+		,getRecordsByRank,getRecordsByYear,getRecordsByCombo,submitExtraServices,getGeneralRecordsForForm){
 
 		var self=this;
 		self.searchType= "All";
 		var studentRecord ;
+		var classRecords;
 		self.pageTypeSearch=true;
 		self.recordNotInserted=false;
 		self.recInsertedSuccessfully=true;
@@ -48,6 +49,7 @@
 
 	//structure to hold class info
 	self.classStruct={
+		"cls_code":"",
 		"cls_description":"",
 		"cls_level":"",
 		"instructor":{
@@ -110,10 +112,20 @@
 
 	//initialise structure for next student insertion	
 	self.refreshClassData = function(){
+		self.classStruct.cls_code="";
 		self.classStruct.cls_description = "";
 		self.classStruct.cls_level="";
 		self.classStruct.instructor.ins_number="";
 	}
+
+	self.refreshscheduleStruct= function(){
+		self.scheduleStruct.sch_dayweek="";
+		self.scheduleStruct.start_time="";
+		self.scheduleStruct.end_time="";
+		self.scheduleStruct.classs.cls_code="";
+		self.scheduleStruct.classs.cls_description="";
+		
+	};
 
 	//******************functions to save data **************//
 	//function to save student record
@@ -136,7 +148,9 @@
 	}
 	//function to save Schedule record
 	self.saveSchedule = function(){
-		
+		self.apiCallToSaveClassSchedule(self.scheduleStruct);
+		self.recordNotInserted=true;
+		self.addSchedulePage=false;
 	}
 	//function to save Rank record
 	self.saveRank = function(){
@@ -336,6 +350,8 @@
 			self.refreshClassData();
 		}
 		else if(data == 'Schedule'){
+			//self.refreshClassData();
+			self.refreshscheduleStruct();
 			self.recordNotInserted=false;
 			self.addStudentPage=false;
 			self.addClassPage=false;
@@ -343,6 +359,7 @@
 			self.addRankPage=false;
 			self.addRankReqPage=false;
 			self.addPageSelected=true;
+			self.apiCallToGetGeneralRecordsForClass();
 
 		}
 		else if(data == 'Rank'){
@@ -480,6 +497,18 @@
 		})
 	}
 
+	//Api call to get all class records
+	getGeneralRecordsForForm
+	self.apiCallToGetGeneralRecordsForClass=function(){
+		getGeneralRecordsForForm.getClassRecords()
+		.then(function(data){
+			console.log(data);
+			self.classRecords =data;
+		})
+	}
+
+
+	//*******************SAVE API Calls**************//
 	//API to save Student information
 	self.apiCallToSaveStudent=function(arg1){
 		submitStudentRecord.saveRecord(arg1)
@@ -503,6 +532,19 @@
 			self.recInsertedSuccessfully=false;
 		});
 	}
+
+	//Api call to save Class Schedule
+	self.apiCallToSaveClassSchedule=function(arg1){
+		submitExtraServices.saveClassSchedule(arg1)
+		.then(function (argument) {
+			console.log("Success");
+			self.recInsertedSuccessfully=true;
+		},function (argument){
+			console.log("Failure");
+			self.recInsertedSuccessfully=false;
+		});
+	}
+
 
 
 });
