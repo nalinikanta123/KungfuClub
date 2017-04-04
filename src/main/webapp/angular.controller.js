@@ -16,6 +16,9 @@
 		var studParentRecords;
 		var studAttRecords;
 		var studRankAchRecords;
+		var studRankHistRecords;
+		var classAllSchRecords;
+		var allRankReqRecords;
 		self.pageTypeSearch=true;
 		self.recordNotInserted=false;
 		self.recInsertedSuccessfully=true;
@@ -307,6 +310,7 @@
 		self.showStudParentPage=false;
 		self.showStdClassAttPage=false;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 	self.viewFullInfoPage=function(data){
 		//console.log("Call recieved to show update page");
@@ -323,6 +327,7 @@
 		self.showStudParentPage=false;
 		self.showStudClassAttPage=false;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 	self.viewFullEditStudPage=function(data){
 		//console.log("Call recieved to show update page");
@@ -340,6 +345,7 @@
 		self.showStudParentPage=false;
 		self.showStudClassAttPage=false;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 	self.viewStudFeePage=function(data){
 		//console.log("Call recieved to show update page");
@@ -362,6 +368,7 @@
 		self.showStudParentPage=false;
 		self.showStudClassAttPage=false;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 	self.viewAddFeePage=function(){
 		//console.log("Call recieved to show update page");
@@ -380,6 +387,7 @@
 		self.showStudParentPage=false;
 		self.showStudClassAttPage=false;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 	self.viewStudParentPage=function(data){
 		console.log("Call recieved to show update page");
@@ -402,6 +410,7 @@
 		self.showStudFeePage=false;
 		self.showStudClassAttPage=false;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 	self.viewAddParentPage=function(){
 		console.log("Call recieved to show update page");
@@ -421,6 +430,7 @@
 		self.showStudParentPage=false;
 		self.showStudClassAttPage=false;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 	self.viewStudClassAttPage=function(data){
 		//console.log("Call recieved to show update page");
@@ -444,6 +454,7 @@
 		self.showStudParentPage=false;
 		self.showStudClassAttPage=true;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 	self.viewAddClassAttPage=function(){
 		//console.log("Call recieved to show update page");
@@ -464,6 +475,7 @@
 		self.showStudParentPage=false;
 		self.showStudClassAttPage=false;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 	self.viewStudRankReqCompPage=function(data){
 		console.log("Calling viewStudRankReqCompPage");
@@ -488,6 +500,27 @@
 		self.showStudParentPage=false;
 		self.showStudClassAttPage=false;
 		self.showStudRankReqCompPage=true;
+		self.showStudRankHistCompPage=false;
+	}
+	self.viewStudRankHistCompPage=function(){
+		console.log("Calling viewStudRankReqCompPage");
+		console.log("self.updateStudNumRecord" + self.updateStudNumRecord);
+		self.apiCallToGetGeneralRecordsForStudRankHist(self.updateStudNumRecord);
+		self.rankRecords="";
+		self.rankReqRecords="";
+		self.showUpdatePage=true;
+		self.showViewFullPage=false;
+		self.showEditStudPage=false;
+		self.showAddFeePage=false;
+		self.showAddParentPage=false;
+		self.showAddClassAttPage=false;
+		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=true;
 	}
 	self.viewAddRankReqCompPage=function(){
 		//console.log("Call recieved to show update page");
@@ -510,6 +543,7 @@
 		self.showStudParentPage=false;
 		self.showStudClassAttPage=false;
 		self.showStudRankReqCompPage=false;
+		self.showStudRankHistCompPage=false;
 	}
 
 
@@ -682,6 +716,10 @@
 			self.addRankPage=false;
 			self.addRankReqPage=false;
 			self.addPageSelected=true;
+			self.viewClassPage=false;
+			self.viewSchedulePage=false;
+			self.viewRankPage=false;
+			self.viewRankReqPage=false;
 			self.refreshData();
 		}
 		else if(data == 'Class'){
@@ -692,7 +730,26 @@
 			self.addRankPage=false;
 			self.addRankReqPage=false;
 			self.addPageSelected=true;
+			self.viewClassPage=false;
+			self.viewSchedulePage=false;
+			self.viewRankPage=false;
+			self.viewRankReqPage=false;
 			self.refreshClassData();
+		}
+		else if(data == 'ViewClass'){
+			self.recordNotInserted=false;
+			self.addStudentPage=false;
+			self.addClassPage=false;
+			self.addSchedulePage=false;
+			self.addRankPage=false;
+			self.addRankReqPage=false;
+			self.addPageSelected=true;
+			self.viewClassPage=true;
+			self.viewSchedulePage=false;
+			self.viewRankPage=false;
+			self.viewRankReqPage=false;
+			self.refreshClassData();
+			self.apiCallToGetGeneralRecordsForClass();
 		}
 		else if(data == 'Schedule'){
 			//self.refreshClassData();
@@ -704,8 +761,26 @@
 			self.addRankPage=false;
 			self.addRankReqPage=false;
 			self.addPageSelected=true;
+			self.viewClassPage=false;
+			self.viewSchedulePage=false;
+			self.viewRankPage=false;
+			self.viewRankReqPage=false;
 			self.apiCallToGetGeneralRecordsForClass();
-
+		}
+		else if(data == 'ViewSchedule'){
+			self.refreshscheduleStruct();
+			self.recordNotInserted=false;
+			self.addStudentPage=false;
+			self.addClassPage=false;
+			self.addSchedulePage=false;
+			self.addRankPage=false;
+			self.addRankReqPage=false;
+			self.addPageSelected=true;
+			self.viewClassPage=false;
+			self.viewSchedulePage=true;
+			self.viewRankPage=false;
+			self.viewRankReqPage=false;
+			self.apiCallToGetGeneralRecordsForAllClassSchedule();
 		}
 		else if(data == 'Rank'){
 			self.refreshrankStruct();
@@ -716,6 +791,25 @@
 			self.addRankPage=true;
 			self.addRankReqPage=false;
 			self.addPageSelected=true;
+			self.viewClassPage=false;
+			self.viewSchedulePage=false;
+			self.viewRankPage=false;
+			self.viewRankReqPage=false;
+		}
+		else if(data == 'ViewRank'){
+			self.refreshrankStruct();
+			self.recordNotInserted=false;
+			self.addStudentPage=false;
+			self.addClassPage=false;
+			self.addSchedulePage=false;
+			self.addRankPage=false;
+			self.addRankReqPage=false;
+			self.addPageSelected=true;
+			self.viewClassPage=false;
+			self.viewSchedulePage=false;
+			self.viewRankPage=true;
+			self.viewRankReqPage=false;
+			self.apiCallToGetGeneralRecordsForRank();
 		}
 		else if(data == 'RankReq'){
 			//self.refreshrankReqStruct();
@@ -729,6 +823,27 @@
 			self.addRankPage=false;
 			self.addRankReqPage=true;
 			self.addPageSelected=true;
+			self.viewClassPage=false;
+			self.viewSchedulePage=false;
+			self.viewRankPage=false;
+			self.viewRankReqPage=false;
+		}
+		else if(data == 'ViewRankReq'){
+			//self.refreshrankReqStruct();
+			self.refreshnewRankReq();
+			self.rankReqRecords="";
+			self.recordNotInserted=false;
+			self.addStudentPage=false;
+			self.addClassPage=false;
+			self.addSchedulePage=false;
+			self.addRankPage=false;
+			self.addRankReqPage=false;
+			self.addPageSelected=true;
+			self.viewClassPage=false;
+			self.viewSchedulePage=false;
+			self.viewRankPage=false;
+			self.viewRankReqPage=true;
+			self.apiCallToGetGeneralRecordsForAllRankReq();
 		}
 	}
 
@@ -885,6 +1000,14 @@
 		})
 	}
 
+	//get all rank req
+	self.apiCallToGetGeneralRecordsForAllRankReq=function(){
+		getGeneralRecordsForForm.getAllRankReqRecords()
+		.then(function(data){
+			console.log(data);
+			self.allRankReqRecords =data;
+		})
+	}
 	
 	//get class schedule
 	self.apiCallToGetGeneralRecordsForClassSchedule=function(data){
@@ -894,6 +1017,17 @@
 		.then(function(data){
 			console.log(data);
 			self.classSchRecords =data;
+		})
+	}
+
+	//get all schedule
+	self.apiCallToGetGeneralRecordsForAllClassSchedule=function(data){
+		console.log("call to apiCallToGetGeneralRecordsForClassSchedule recieved");
+		console.log("data = "+ data);
+		getGeneralRecordsForForm.getAllClassSchedule(data)
+		.then(function(data){
+			console.log(data);
+			self.classAllSchRecords =data;
 		})
 	}
 
@@ -961,6 +1095,15 @@
 		})
 	}
 
+	//get all Rank History records by students 
+	self.apiCallToGetGeneralRecordsForStudRankHist=function(arg1){
+		getGeneralRecordsForForm.getAllRankHistRecordPerStud(arg1)
+		.then(function(data){
+			console.log(data);
+			self.studRankHistRecords =data;
+		})
+	}
+
 	//*******************SAVE API Calls**************//
 	//API to save Student information
 	self.apiCallToSaveStudent=function(arg1){
@@ -1016,7 +1159,7 @@
 
 	//Api to save new rank req
 	self.apiCallToSaveRankReq=function(arg1){
-		submitExtraServices.saveRankReq(arg1)
+		submitExtraServices.apiCallToSaveRankReq(arg1)
 		.then(function (argument) {
 			console.log("Success");
 			self.alertMessage="Rank Requirement";

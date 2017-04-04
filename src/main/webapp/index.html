@@ -24,7 +24,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" style="color: #FFFFFF">Stephanos Kung Fu Club</a>
+            <a class="navbar-brand" href="#" style="color: #FFFFFF">Stephaneos's Kung Fu Club</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
           </div><!--/.nav-collapse -->
@@ -342,6 +342,11 @@
 
     <!--Start of Class form-->
     <div ng-show="stud.addClassPage">
+     <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.addCallSwitch('ViewClass')" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; float: right; margin-left: 800px">
+                Available Class Info
+              </button>
+      </div> 
      <h3 style="text-align: center;">Class Form</h3>
       <div class="form-group">
           <label for="usr">Class Description:</label>
@@ -362,8 +367,67 @@
     </div>
     <!--End of Class form-->
 
+    <!--Start of View Class form-->
+    <div ng-show="stud.viewClassPage">
+      <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.addCallSwitch('Class')" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; float: right; margin-left: 800px">
+                Add Class Info
+              </button>
+      </div> 
+      <h3 style="text-align: center;">Available Classes</h3> 
+        <div>
+          <div ng-hide="stud.classRecords.length>0">
+            <div class="well well-sm" style="margin-top: 20px;">
+              <h5 style="text-align: center;">No Record Found</h5s>
+            </div>
+          </div>
+          <div ng-repeat="record in stud.classRecords " style="margin-top: 20px;">
+            <div class="well well-sm" >
+              <span>Class Code: </span> {{record.cls_code}} <br>
+              <span>Class Description: </span> {{record.cls_description}} <br>
+              <span>Class Level: </span> {{record.cls_level}} <br>
+              <span>Class Instructor: </span> {{record.instructor.ins_name}} <br>
+            </div > 
+          </div> 
+        </div>
+    </div>
+    <!--End of View Class form-->
+
+    <!--Start of View Schedule form-->
+    <div ng-show="stud.viewSchedulePage">
+    <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.addCallSwitch('Schedule')" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; float: right; margin-left: 800px">
+                Add Class Schedule
+              </button>
+    </div> 
+    <h3 style="text-align: center;">Available Class Schedule</h3>
+       <div>
+          <div ng-hide="stud.classAllSchRecords.length>0">
+            <div class="well well-sm" style="margin-top: 20px;">
+              <h5 style="text-align: center;">No Record Found</h5s>
+            </div>
+          </div>
+          <div ng-repeat="record in stud.classAllSchRecords " style="margin-top: 20px;">
+            <div class="well well-sm" >
+              <span>Schedule Number: </span> {{record.sch_num}} <br>
+              <span>Class Number: </span> {{record.classs.cls_code}} <br>
+              <span>Class Description: </span> {{record.classs.cls_description}} <br>
+              <span>Schedule Day: </span> {{record.sch_dayweek}} <br>
+              <span>Schedule Start Time: </span> {{record.start_time}} <br>
+              <span>Schedule End Time: </span> {{record.end_time}} <br>
+            </div > 
+          </div> 
+        </div>
+    </div>
+    <!--End of View Schedule form-->
+
     <!--Start of Schedule form-->
     <div ng-show="stud.addSchedulePage">
+    <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.addCallSwitch('ViewSchedule')" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; float: right; margin-left: 800px">
+                Available Class Schedule
+              </button>
+    </div> 
     <h3 style="text-align: center;">Class Schedule Form</h3>
        <!--Add the drop down here-->
        <div class="form-group">
@@ -388,8 +452,38 @@
     </div>
     <!--End of Schedule form-->
 
-    <!--Start of Rank form-->
+    <!--Start of View Rank form-->
+    <div ng-show="stud.viewRankPage">
+    <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.addCallSwitch('Rank')" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; float: right; margin-left: 800px">
+                Add Rank 
+              </button>
+    </div> 
+      <h3 style="text-align: center;">Rank Information</h3>
+       <div>
+          <div ng-hide="stud.rankRecords.length>0">
+            <div class="well well-sm" style="margin-top: 20px;">
+              <h5 style="text-align: center;">No Record Found</h5s>
+            </div>
+          </div>
+          <div ng-repeat="record in stud.rankRecords " style="margin-top: 20px;">
+            <div class="well well-sm" >
+              <span>Rank Code: </span> {{record.rk_code}} <br>
+              <span>Rank Name: </span> {{record.rk_name}} <br>
+              <span>Belt Color: </span> {{record.rk_belt_color}} <br>
+            </div > 
+          </div> 
+        </div>
+    </div>
+    <!--End of View Rank form-->
+
+    <!--Start of Rank form--> 
     <div ng-show="stud.addRankPage">
+    <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.addCallSwitch('ViewRank')" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; float: right; margin-left: 800px">
+                Available Rank Info
+              </button>
+    </div> 
       <h3 style="text-align: center;">Rank Form</h3>
       <div class="form-group">
           <label for="usr">Rank Code:</label>
@@ -407,8 +501,38 @@
     </div>
     <!--End of Rank form-->
 
+    <!--Start of view RankReq form-->
+    <div ng-show="stud.viewRankReqPage">
+     <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.addCallSwitch('RankReq')" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; float: right; margin-left: 800px">
+                Add Rank Requirement
+              </button>
+    </div> 
+      <h3 style="text-align: center;"> Available Rank Requirement</h3>
+      <div>
+          <div ng-hide="stud.allRankReqRecords.length>0">
+            <div class="well well-sm" style="margin-top: 20px;">
+              <h5 style="text-align: center;">No Record Found</h5s>
+            </div>
+          </div>
+          <div ng-repeat="record in stud.allRankReqRecords " style="margin-top: 20px;">
+            <div class="well well-sm" >
+              <span>Requirement Code: </span> {{record.req_num}} <br>
+              <span>Requirement Description: </span> {{record.req_description}} <br>
+              <span>Rank Code: </span> {{record.rank.rk_code}} <br>
+            </div > 
+          </div> 
+        </div>
+    </div>
+    <!--End of view RankReq form-->
+
     <!--Start of RankReq form-->
     <div ng-show="stud.addRankReqPage">
+     <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.addCallSwitch('ViewRankReq')" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; float: right; margin-left: 800px">
+                Available Rank Requirement
+              </button>
+    </div> 
       <h3 style="text-align: center;">Rank Achieved Form</h3>
        <div class="form-group">
           <label for="usr"> Rank:</label>
@@ -603,7 +727,7 @@
                   <span>Fee Number: </span> {{record.fee_num}} <br>
                   <span>Fee Description:</span> {{record.fee_description}} <br>
                   <span>Payment Amount:</span> {{record.fee_value}} <br>
-                  <span>Date of Payment:</span> {{record.rank.fee_date}} <br>
+                  <span>Date of Payment:</span> {{record.fee_date}} <br>
               </div > 
             </div> 
           </div>
@@ -797,6 +921,11 @@
                 Add Req Compeletion
               </button>
           </div>
+           <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewStudRankHistCompPage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                Rank History
+              </button>
+          </div> 
           <h3 style="text-align: center;">Req Compeletion Record</h3>
           <div>
              <div ng-hide="stud.studRankAchRecords.length>0">
@@ -817,12 +946,49 @@
       </div>
        <!--End for Req Completion page view-->
 
+      <!--Start for Rank History page view-->
+      <div class="addReqCompView"> 
+        <div ng-show="stud.showStudRankHistCompPage">
+         <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewAddRankReqCompPage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                Add Req Compeletion
+              </button>
+          </div>
+           <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewStudRankReqCompPage(0)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                View Req Compeletion
+              </button>
+          </div> 
+          <h3 style="text-align: center;">Rank History</h3>
+          <div>
+             <div ng-hide="stud.studRankHistRecords.length>0">
+                <div class="well well-sm" style="margin-top: 20px;">
+                  <h5 style="text-align: center;">No Record Found</h5s>
+                </div>
+             </div>
+             <div ng-repeat="record in stud.studRankHistRecords " style="margin-top: 20px;">
+              <div class="well well-sm" >
+                  <span>Rank Number: </span> {{record.rank.rk_code}} <br>
+                  <span>Belt: </span> {{record.rank.rk_belt_color}} <br>
+                  <span>Date: </span> {{record.dt_achieved}} <br>
+              </div > 
+            </div> 
+          </div>
+         </div>
+      </div>
+       <!--End for Req History page view-->
+
       <!--Start for Add Req Completion page view-->
       <div class="addReqCompView"> 
         <div ng-show="stud.showAddRankReqCompPage">
           <div class="btn-group">
               <button type="button" class="btn btn-primary" ng-click="stud.viewStudRankReqCompPage(0)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
                 View Req Compeletion
+              </button>
+          </div> 
+          <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewStudRankHistCompPage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                Rank History
               </button>
           </div> 
           <h3 style="text-align: center;">Add Rank Req Completion Form</h3>

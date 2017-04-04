@@ -160,6 +160,17 @@ app.service("updatedFormsServices",updatedFormsServices);
 			return p2;
 		}
 
+		//get all schedule for all classes
+		self.getAllClassSchedule=function(){
+			console.log("inside getAllClassSchedule service");
+			var p1= $http.get('http://localhost:8080/classSchedule/');
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
 		//get all rank info
 		self.getRankRecords= function(){
 			console.log("inside getRankRecords service with data");
@@ -175,6 +186,17 @@ app.service("updatedFormsServices",updatedFormsServices);
 		self.getRankReqRecords= function(data){
 			console.log("inside getRankReqRecords service with data" + data);
 			var p1= $http.get('http://localhost:8080/rankReq/'+ data);
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
+		//get All rank req
+		self.getAllRankReqRecords= function(){
+			console.log("inside getAllRankReqRecords service with data");
+			var p1= $http.get('http://localhost:8080/rankReq/');
 			var p2= p1.then(function (response){
 				console.log(response.data);
 				return response.data;
@@ -258,6 +280,18 @@ app.service("updatedFormsServices",updatedFormsServices);
 			});
 			return p2;
 		}
+
+		//get all rank Hist  records
+		self.getAllRankHistRecordPerStud= function(data){
+			console.log("inside getAllRankHistRecordPerStud service");
+			var p1= $http.get('http://localhost:8080/rankHist/stud/'+data);
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
 
 	}
 
@@ -405,6 +439,8 @@ app.service("updatedFormsServices",updatedFormsServices);
 			});
 			return promise2;
 		}
+
+
 
 
 	}
