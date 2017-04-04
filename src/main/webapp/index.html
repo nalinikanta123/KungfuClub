@@ -202,26 +202,26 @@
               <button type="button" class="btn btn-primary" ng-click="stud.viewFullEditStudPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; margin-top: 10px">
                 Update Info/Rank
               </button>
-            </div>  
+            </div> 
             <div class="btn-group">
-              <button type="button" class="btn btn-primary" ng-click="stud.viewAddFeePage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; margin-top: 10px">
-                Add Fee
+              <button type="button" class="btn btn-primary" ng-click="stud.viewStudFeePage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; margin-top: 10px">
+                View/Add Fee
               </button>
             </div>
             <br>
             <div class="btn-group">
-              <button type="button" class="btn btn-primary" ng-click="stud.viewAddParentPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
-                Add Parent
+              <button type="button" class="btn btn-primary" ng-click="stud.viewStudParentPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                View/Add Parents
               </button>
             </div>
             <div class="btn-group">
-              <button type="button" class="btn btn-primary" ng-click="stud.viewAddClassAttPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
-                Add Class Attendence
+              <button type="button" class="btn btn-primary" ng-click="stud.viewStudClassAttPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                View/Add Class Attendence
               </button>
             </div>
             <div class="btn-group">
-              <button type="button" class="btn btn-primary" ng-click="stud.viewAddRankReqCompPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
-                Add Req Compeletion
+              <button type="button" class="btn btn-primary" ng-click="stud.viewStudRankReqCompPage(record.std_num)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                View/Add Req Compeletion
               </button>
             </div> 
           </div>
@@ -443,8 +443,8 @@
   <!--Start of Update Block-->
   <div ng-show="stud.showUpdatePage">
     <div class="jumbotron">
-        <button type="button" class="btn btn-primary" ng-click="stud.showSearchPage()" style="float: right">
-          Search
+        <button type="button" class="btn btn-primary" ng-click="stud.showSearchPage()" style="float: right; width: 150px">
+          Back to Search
         </button>
 
       <!--Start for Full page view-->
@@ -583,14 +583,47 @@
       </div>
       <!--End for Update/Edit page view-->
 
+      <!--Start for All Fee page view-->
+      <div class="addFeeView"> 
+        <div ng-show="stud.showStudFeePage">
+          <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewAddFeePage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; margin-top: 10px">
+                Add Fee
+              </button>
+          </div>
+          <h3 style="text-align: center;">Fee Information</h3>
+          <div>
+             <div ng-hide="stud.studFeeRecords.length>0">
+                <div class="well well-sm" style="margin-top: 20px;">
+                  <h5 style="text-align: center;">No Record Found</h5s>
+                </div>
+             </div>
+             <div ng-repeat="record in stud.studFeeRecords " style="margin-top: 20px;">
+              <div class="well well-sm" >
+                  <span>Fee Number: </span> {{record.fee_num}} <br>
+                  <span>Fee Description:</span> {{record.fee_description}} <br>
+                  <span>Payment Amount:</span> {{record.fee_value}} <br>
+                  <span>Date of Payment:</span> {{record.rank.fee_date}} <br>
+              </div > 
+            </div> 
+          </div>
+        </div>
+      </div>
+      <!--End for All Fee page view-->
+
       <!--Start for Add Fee page view-->
       <div class="addFeeView"> 
         <div ng-show="stud.showAddFeePage">
+         <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewStudFeePage(0)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px; margin-top: 10px">
+                Fee Information
+              </button>
+          </div>
           <h3 style="text-align: center;">Add Fee Form</h3>
           <form>
              <div class="form-group">
               <label for="usr">Student:</label>
-              <input type="text" class="form-control" id="usr" disabled="true" ng-model="stud.newFeeStruct.student.std_num" value="stud.studentStruct.std_num">
+              <input type="text" class="form-control" id="usr" disabled="true" ng-model="stud.newFeeStruct.student.std_num" value="stud.updateStudNumRecord">
              </div>
              <div class="form-group">
               <label for="usr">Fee Description:</label>
@@ -610,9 +643,45 @@
       </div>
       <!--End for Add Fee page view-->
 
+      <!--Start for Parent page view-->
+      <div class="addParentView"> 
+        <div ng-show="stud.showStudParentPage">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" ng-click="stud.viewAddParentPage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                Parent Information
+            </button>
+          </div>
+          <h3 style="text-align: center;">Add Parent Form</h3>
+          <div>
+             <div ng-hide="stud.studParentRecords.length>0">
+                <div class="well well-sm" style="margin-top: 20px;">
+                  <h5 style="text-align: center;">No Record Found</h5s>
+                </div>
+             </div>
+             <div ng-repeat="record in stud.studParentRecords " style="margin-top: 20px;">
+              <div class="well well-sm" >
+                  <span>Parent Type: </span> {{record.prt_type}} <br>
+                  <span>Parent First Name:</span> {{record.prt_fname}} <br>
+                  <span>Parent Last Name:</span> {{record.prt_lname}} <br>
+                  <span>Phone:</span> {{record.prt_phone}} <br>
+                  <span>Email:</span> {{record.prt_email}} <br>
+                  <span ng-if="record.studentParent.std_num >0">Parent Student ID: {{record.studentParent.std_num}} <br></span> 
+              </div > 
+            </div> 
+          </div>
+         </div>
+        
+      </div>
+      <!--End for Parent page view-->
+
       <!--Start for Add Parent page view-->
       <div class="addParentView"> 
         <div ng-show="stud.showAddParentPage">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" ng-click="stud.viewStudParentPage(0)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                Parent Information
+            </button>
+          </div>
           <h3 style="text-align: center;">Add Parent Form</h3>
           <form>
              <div class="form-group">
@@ -657,7 +726,41 @@
 
       <!--Start for Class Attendence page view-->
       <div class="classAttendenceView"> 
+        <div ng-show="stud.showStudClassAttPage">
+          <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewAddClassAttPage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                Add Class Attendence
+              </button>
+          </div>
+          <h3 style="text-align: center;">Class Attendence Records</h3> 
+          <div>
+             <div ng-hide="stud.studAttRecords.length>0">
+                <div class="well well-sm" style="margin-top: 20px;">
+                  <h5 style="text-align: center;">No Record Found</h5s>
+                </div>
+             </div>
+             <div ng-repeat="record in stud.studAttRecords " style="margin-top: 20px;">
+              <div class="well well-sm" >
+                  <span>Class Code: </span> {{record.classs.cls_code}} <br>
+                  <span>Class Description:</span> {{record.classs.cls_description}} <br>
+                  <span>Class Start Time :</span> {{record.classSch.start_time}} <br>
+                  <span>Class End Time:</span> {{record.classSch.end_time}} <br>
+                  <span>Attendance Date:</span> {{record.att_date}} <br>
+              </div > 
+            </div> 
+          </div>
+         </div>
+      </div>
+      <!--End for Class Attendence page view-->
+
+      <!--Start for Add Class Attendence page view-->
+      <div class="classAttendenceView"> 
         <div ng-show="stud.showAddClassAttPage">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" ng-click="stud.viewStudClassAttPage(0)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                Class Attendence
+            </button>
+          </div>
           <h3 style="text-align: center;">Add Class Attendence Form</h3>
           <form>
              <div class="form-group">
@@ -684,11 +787,44 @@
           </form>
          </div>
       </div>
-      <!--End for Class Attendence page view-->
+      <!--End for add Class Attendence page view-->
+
+      <!--Start for Req Completion page view-->
+      <div class="addReqCompView"> 
+        <div ng-show="stud.showStudRankReqCompPage">
+         <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewAddRankReqCompPage()" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                Add Req Compeletion
+              </button>
+          </div>
+          <h3 style="text-align: center;">Req Compeletion Record</h3>
+          <div>
+             <div ng-hide="stud.studRankAchRecords.length>0">
+                <div class="well well-sm" style="margin-top: 20px;">
+                  <h5 style="text-align: center;">No Record Found</h5s>
+                </div>
+             </div>
+             <div ng-repeat="record in stud.studRankAchRecords " style="margin-top: 20px;">
+              <div class="well well-sm" >
+                  <span>Rank Number: </span> {{record.rank.rk_code}} <br>
+                  <span>Rank Requirement Number:</span> {{record.rank_req.req_num}} <br>
+                  <span>Requirement Description:</span> {{record.rank_req.req_description}} <br>
+                  <span>Date:</span> {{record.dt_achieved}} <br>
+              </div > 
+            </div> 
+          </div>
+         </div>
+      </div>
+       <!--End for Req Completion page view-->
 
       <!--Start for Add Req Completion page view-->
       <div class="addReqCompView"> 
-      <div ng-show="stud.showAddRankReqCompPage">
+        <div ng-show="stud.showAddRankReqCompPage">
+          <div class="btn-group">
+              <button type="button" class="btn btn-primary" ng-click="stud.viewStudRankReqCompPage(0)" style="width: 200px ;margin-right: 10px; margin-bottom: 10px">
+                View Req Compeletion
+              </button>
+          </div> 
           <h3 style="text-align: center;">Add Rank Req Completion Form</h3>
           <form>
              <div class="form-group">
@@ -715,6 +851,7 @@
           </form>
          </div>
       </div>
+       <!--End for Add Req Completion page view-->
       <!--Success and failure messages for -->
       <div ng-show="stud.recordNotInserted">
         <div style="margin-top: 100px;">
@@ -726,7 +863,7 @@
          </div>
         </div> 
       </div>
-      <!--End for Add Req Completion page view-->
+     
     </div>
   <!--End of -->
   </div>

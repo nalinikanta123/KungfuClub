@@ -215,6 +215,50 @@ app.service("updatedFormsServices",updatedFormsServices);
 			return p2;
 		}
 
+		//get all fee record per student
+		self.getAllFeeRecordPerStud= function(data){
+			console.log("inside getAllFeeRecordPerStud service");
+			var p1= $http.get('http://localhost:8080/fee/stud/'+data);
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
+		//get all parent record per student
+		self.getAllParentRecordPerStud= function(data){
+			console.log("inside getAllParentRecordPerStud service");
+			var p1= $http.get('http://localhost:8080/parent/stud/'+data);
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
+		//get all attendence records
+		self.getAllAttendRecordPerStud= function(data){
+			console.log("inside getAllAttendRecordPerStud service");
+			var p1= $http.get('http://localhost:8080/classAttendance/stud/'+data);
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
+		//get all rank req  records
+		self.getAllRankReqRecordPerStud= function(data){
+			console.log("inside getAllRankReqRecordPerStud service");
+			var p1= $http.get('http://localhost:8080/rankReqHist/stud/'+data);
+			var p2= p1.then(function (response){
+				console.log(response.data);
+				return response.data;
+			});
+			return p2;
+		}
+
 	}
 
 

@@ -12,6 +12,10 @@
 		var rankReqRecords;
 		var classSchRecords;
 		var uniqueRankRecords;
+		var studFeeRecords;
+		var studParentRecords;
+		var studAttRecords;
+		var studRankAchRecords;
 		self.pageTypeSearch=true;
 		self.recordNotInserted=false;
 		self.recInsertedSuccessfully=true;
@@ -32,6 +36,7 @@
 		self.yearOptionSelected="=";
 		self.alertMessage="";
 		self.beltSearchType="";
+		self.updateStudNumRecord="";
 
 
 	//varibables to send data to backend
@@ -298,6 +303,10 @@
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStdClassAttPage=false;
+		self.showStudRankReqCompPage=false;
 	}
 	self.viewFullInfoPage=function(data){
 		//console.log("Call recieved to show update page");
@@ -310,6 +319,10 @@
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=false;
 	}
 	self.viewFullEditStudPage=function(data){
 		//console.log("Call recieved to show update page");
@@ -323,11 +336,38 @@
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=false;
 	}
-	self.viewAddFeePage=function(data){
+	self.viewStudFeePage=function(data){
 		//console.log("Call recieved to show update page");
 		self.refreshnewFeeStruct();
+		if(data != 0){
+			self.updateStudNumRecord=data;
+		}
+		console.log("self.updateStudNumRecord" + self.updateStudNumRecord);
+		self.apiCallToGetGeneralRecordsForFeePaid(self.updateStudNumRecord);
 		self.newFeeStruct.student.std_num=data;
+		self.showUpdatePage=true;
+		self.showViewFullPage=false;
+		self.showEditStudPage=false;
+		self.showStudFeePage=true;
+		self.showAddFeePage=false;
+		self.showAddParentPage=false;
+		self.showAddClassAttPage=false;
+		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=false;
+	}
+	self.viewAddFeePage=function(){
+		//console.log("Call recieved to show update page");
+		self.refreshnewFeeStruct();
+		console.log("self.updateStudNumRecord = " + self.updateStudNumRecord);
+		self.newFeeStruct.student.std_num=self.updateStudNumRecord;
 		self.showUpdatePage=true;
 		self.showViewFullPage=false;
 		self.showEditStudPage=false;
@@ -336,11 +376,38 @@
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=false;
 	}
-	self.viewAddParentPage=function(data){
-		//console.log("Call recieved to show update page");
+	self.viewStudParentPage=function(data){
+		console.log("Call recieved to show update page");
 		self.refreshnewParentStruct();
+		if(data != 0){
+			self.updateStudNumRecord=data;
+		}
+		console.log("self.updateStudNumRecord" + self.updateStudNumRecord);
+		self.apiCallToGetGeneralRecordsForStudParent(self.updateStudNumRecord);
 		self.newParentStruct.student.std_num=data;
+		self.showUpdatePage=true;
+		self.showViewFullPage=false;
+		self.showEditStudPage=false;
+		self.showAddFeePage=false;
+		self.showAddParentPage=false;
+		self.showStudParentPage=true;
+		self.showAddClassAttPage=false;
+		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=false;
+	}
+	self.viewAddParentPage=function(){
+		console.log("Call recieved to show update page");
+		self.refreshnewParentStruct();
+		console.log("self.updateStudNumRecord" + self.updateStudNumRecord);
+		self.newParentStruct.student.std_num=self.updateStudNumRecord;
 		self.apiCall();
 		self.showUpdatePage=true;
 		self.showViewFullPage=false;
@@ -350,14 +417,41 @@
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
-
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=false;
 	}
-	self.viewAddClassAttPage=function(data){
+	self.viewStudClassAttPage=function(data){
+		//console.log("Call recieved to show update page");
+		self.refreshnewClassAttendence();
+		if(data != 0){
+			self.updateStudNumRecord=data;
+		}
+		console.log("self.updateStudNumRecord" + self.updateStudNumRecord);
+		self.apiCallToGetGeneralRecordsForStudAttd(self.updateStudNumRecord);
+		self.classSchRecords="";
+		self.newClassAttendence.studentFee.std_num=data;
+		self.showUpdatePage=true;
+		self.showViewFullPage=false;
+		self.showEditStudPage=false;
+		self.showAddFeePage=false;
+		self.showAddParentPage=false;
+		self.showAddClassAttPage=false;
+		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=true;
+		self.showStudRankReqCompPage=false;
+	}
+	self.viewAddClassAttPage=function(){
 		//console.log("Call recieved to show update page");
 		self.refreshnewClassAttendence();
 		self.classSchRecords="";
 		self.apiCallToGetGeneralRecordsForClass();
-		self.newClassAttendence.studentFee.std_num=data;
+		console.log("self.updateStudNumRecord" + self.updateStudNumRecord);
+		self.newClassAttendence.studentFee.std_num=self.updateStudNumRecord;
 		self.showUpdatePage=true;
 		self.showViewFullPage=false;
 		self.showEditStudPage=false;
@@ -366,12 +460,41 @@
 		self.showAddClassAttPage=true;
 		self.showAddRankReqCompPage=false;
 		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=false;
 	}
-	self.viewAddRankReqCompPage=function(data){
+	self.viewStudRankReqCompPage=function(data){
+		console.log("Calling viewStudRankReqCompPage");
+		self.refreshnewClassAchReq();
+			if(data != 0){
+			self.updateStudNumRecord=data;
+		}
+		console.log("self.updateStudNumRecord" + self.updateStudNumRecord);
+		self.apiCallToGetGeneralRecordsForStudRankAch(self.updateStudNumRecord);
+		self.newClassAchReq.student.std_num=data;
+		self.rankRecords="";
+		self.rankReqRecords="";
+		self.showUpdatePage=true;
+		self.showViewFullPage=false;
+		self.showEditStudPage=false;
+		self.showAddFeePage=false;
+		self.showAddParentPage=false;
+		self.showAddClassAttPage=false;
+		self.showAddRankReqCompPage=false;
+		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=true;
+	}
+	self.viewAddRankReqCompPage=function(){
 		//console.log("Call recieved to show update page");
 		console.log("call to viewAddRankReqCompPage");
 		self.refreshnewClassAchReq();
-		self.newClassAchReq.student.std_num=data;
+		console.log("self.updateStudNumRecord" + self.updateStudNumRecord);
+		self.newClassAchReq.student.std_num=self.updateStudNumRecord;
 		self.rankRecords="";
 		self.rankReqRecords="";
 		self.apiCallToGetGeneralRecordsForRank();
@@ -383,6 +506,10 @@
 		self.showAddClassAttPage=false;
 		self.showAddRankReqCompPage=true;
 		self.recordNotInserted=false;
+		self.showStudFeePage=false;
+		self.showStudParentPage=false;
+		self.showStudClassAttPage=false;
+		self.showStudRankReqCompPage=false;
 	}
 
 
@@ -788,12 +915,49 @@
 		})
 	}
 	
-	//get all rank belts occupied by students getUniqueRankBelt
+	//get all rank belts occupied by students 
 	self.apiCallToGetGeneralRecordsForActiveRankBelt=function(){
 		getGeneralRecordsForForm.getUniqueRankBelt()
 		.then(function(data){
 			console.log(data);
 			self.uniqueRankRecords =data;
+		})
+	}
+
+	//get all fee paid  by students 
+	self.apiCallToGetGeneralRecordsForFeePaid=function(arg1){
+		getGeneralRecordsForForm.getAllFeeRecordPerStud(arg1)
+		.then(function(data){
+			console.log(data);
+			self.studFeeRecords =data;
+		})
+	}
+
+	//get all Parent records by students 
+	self.apiCallToGetGeneralRecordsForStudParent=function(arg1){
+		getGeneralRecordsForForm.getAllParentRecordPerStud(arg1)
+		.then(function(data){
+			console.log(data);
+			self.studParentRecords =data;
+		})
+	}
+
+	//get all Attend records by students 
+	self.apiCallToGetGeneralRecordsForStudAttd=function(arg1){
+		getGeneralRecordsForForm.getAllAttendRecordPerStud(arg1)
+		.then(function(data){
+			console.log(data);
+			self.studAttRecords =data;
+		})
+	}
+
+	
+	//get all Rank Req Ach records by students 
+	self.apiCallToGetGeneralRecordsForStudRankAch=function(arg1){
+		getGeneralRecordsForForm.getAllRankReqRecordPerStud(arg1)
+		.then(function(data){
+			console.log(data);
+			self.studRankAchRecords =data;
 		})
 	}
 

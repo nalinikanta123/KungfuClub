@@ -27,4 +27,11 @@ public class Class_AttendanceService {
 		classAttRepository.save(classAtt);
 	}
 	
+
+	// 3. Service to get class Att by stud
+	public List<Class_Attendance> getAllClassAttByStud(int id) {
+		List<Class_Attendance> classAtt = new ArrayList<Class_Attendance>();
+		classAttRepository.getCustAttStud(id).forEach(classAtt::add);
+		return classAtt;
+	}
 }
