@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.maru.Test.Test;
-import org.maru.Topic.Topic;
 import org.maru.classMain.Class;
 import org.maru.student.Student;
 

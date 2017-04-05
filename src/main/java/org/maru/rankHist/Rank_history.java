@@ -13,8 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.maru.Test.Test;
-import org.maru.Topic.Topic;
+
 import org.maru.rank.Rank;
 import org.maru.student.Student;
 
@@ -58,12 +57,19 @@ public class Rank_history {
 	public void setRank(Rank rank) {
 		this.rank = rank;
 	}
+	public int getRank_hist_num() {
+		return rank_hist_num;
+	}
+	public void setRank_hist_num(int rank_hist_num) {
+		this.rank_hist_num = rank_hist_num;
+	}
 	public Date getDt_achieved() {
 		return dt_achieved;
 	}
 	public void setDt_achieved(Date dt_achieved) {
 		this.dt_achieved = dt_achieved;
 	}
+	
 	
 	
 }

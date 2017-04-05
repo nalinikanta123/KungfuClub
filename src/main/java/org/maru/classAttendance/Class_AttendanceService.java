@@ -2,8 +2,6 @@ package org.maru.classAttendance;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.maru.Topic.Topic;
 import org.maru.student.Student;
 import org.maru.student.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;

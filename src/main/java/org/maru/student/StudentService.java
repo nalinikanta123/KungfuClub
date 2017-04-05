@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.maru.Topic.Topic;
-import org.maru.Topic.TopicRepository;
+
 import org.maru.rank.Rank;
 import org.maru.rank.RankService;
 import org.maru.rankHist.Rank_history;

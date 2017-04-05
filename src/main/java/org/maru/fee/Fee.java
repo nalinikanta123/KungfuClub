@@ -17,8 +17,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import org.maru.Test.Test;
-import org.maru.Topic.Topic;
+
 import org.maru.student.Student;
 
 import com.fasterxml.jackson.annotation.JsonFormat;

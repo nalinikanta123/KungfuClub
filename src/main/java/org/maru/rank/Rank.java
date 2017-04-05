@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.maru.Test.Test;
+
 import org.maru.student.Student;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

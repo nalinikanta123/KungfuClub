@@ -20,8 +20,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 
-import org.maru.Test.Test;
-import org.maru.Topic.Topic;
 import org.maru.student.Student;
 
 
@@ -33,18 +31,13 @@ public class Parent {
 
 	@Id
 	@GeneratedValue
-	int prt_number;
+	int prt_num;
 //	@Id
 //	@Basic(optional = false)
 	String prt_type;
-//
-//	@Id
-//	@Basic(optional = false)
-//	@Column(name = "std_number_son")
-//	private int std_number_son;
 
 	//@JoinColumn(name = "std_number_son", referencedColumnName = "std_num",insertable=false, updatable=false)
-	@JoinColumn(name = "std_number_son", referencedColumnName = "std_num")
+	@JoinColumn(name = "std_num_son", referencedColumnName = "std_num")
 	@ManyToOne
 	//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@stdNum")
 	public Student student;
@@ -55,7 +48,7 @@ public class Parent {
 	String prt_email;
 	
 	@ManyToOne()
-	@JoinColumn(name = "std_number", referencedColumnName = "std_num")
+	@JoinColumn(name = "std_num", referencedColumnName = "std_num")
 	//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@stdNum1")
 	public Student studentParent;
 
@@ -74,11 +67,11 @@ public class Parent {
 	}
 
 	public int getPrt_number() {
-		return prt_number;
+		return prt_num;
 	}
 
 	public void setPrt_number(int prt_number) {
-		this.prt_number = prt_number;
+		this.prt_num = prt_number;
 	}
 
 	public String getPrt_type() {

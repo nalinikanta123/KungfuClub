@@ -13,8 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.maru.Test.Test;
-import org.maru.Topic.Topic;
+
 import org.maru.rank.Rank;
 import org.maru.rankReq.Rank_Req;
 import org.maru.student.Student;
@@ -50,6 +49,7 @@ public class Rank_req_std_hist {
 	public void setSerial_num(int serial_num) {
 		this.serial_num = serial_num;
 	}
+	
 	public Date getDt_achieved() {
 		return dt_achieved;
 	}

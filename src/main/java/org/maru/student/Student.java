@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.maru.Test.Test;
+
 import org.maru.fee.Fee;
 import org.maru.rank.Rank;
 

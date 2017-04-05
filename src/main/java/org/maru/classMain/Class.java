@@ -14,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.maru.Test.Test;
-import org.maru.Topic.Topic;
 import org.maru.instructor.Instructor;
 import org.maru.student.Student;
 
@@ -30,7 +28,7 @@ public class Class {
 	String cls_description;
 	String cls_level;
 	@OneToOne
-	@JoinColumn(name ="ins_number")
+	@JoinColumn(name ="ins_num")
 	public Instructor instructor;
 	
 	//Getter and Setters

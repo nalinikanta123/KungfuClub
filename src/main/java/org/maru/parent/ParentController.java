@@ -2,7 +2,7 @@ package org.maru.parent;
 
 import java.util.List;
 
-import org.maru.Topic.Topic;
+
 import org.maru.student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

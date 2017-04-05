@@ -15,8 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.maru.Test.Test;
-import org.maru.Topic.Topic;
 import org.maru.classMain.Class;
 import org.maru.classSchedule.Class_Schedule;
 import org.maru.student.Student;
@@ -29,28 +27,26 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Class_Attendance {
 	@Id
 	@GeneratedValue
-	int cls_serial_num;
+	int cls_att_num;
 	@ManyToOne
 	@JoinColumn(name ="std_num")
 	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@stdNum")
 	public Student studentFee;
 	@ManyToOne
 	@JoinColumn(name ="cls_code")
-	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@clsNum")
 	public Class classs;
 	@ManyToOne
 	@JoinColumn(name ="sch_num")
-	//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@schNum")
 	public Class_Schedule classSch;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone="EST")
 	Date att_date;
 	
 	//Getter and Setters
 	public int getCls_serial_num() {
-		return cls_serial_num;
+		return cls_att_num;
 	}
 	public void setCls_serial_num(int cls_serial_num) {
-		this.cls_serial_num = cls_serial_num;
+		this.cls_att_num = cls_serial_num;
 	}
 	public Student getStudentFee() {
 		return studentFee;
