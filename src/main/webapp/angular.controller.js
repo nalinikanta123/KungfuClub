@@ -171,6 +171,8 @@
 	//********************initialise******************//
 	//initialise structure for next student insertion	
 	self.refreshData = 	function(){
+		self.studentStruct.std_num = "";
+		self.studentStruct.std_fname = "";
 		self.studentStruct.std_fname = "";
 		self.studentStruct.std_lname="";
 		self.studentStruct.std_dob="";

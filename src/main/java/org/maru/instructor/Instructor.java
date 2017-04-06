@@ -27,14 +27,15 @@ public class Instructor {
 	String ins_name;
 	
 	//All getter and setters
-	public int getIns_number() {
-		return ins_num;
-	}
-	public void setIns_number(int ins_number) {
-		this.ins_num = ins_number;
-	}
+	
 	public String getIns_name() {
 		return ins_name;
+	}
+	public int getIns_num() {
+		return ins_num;
+	}
+	public void setIns_num(int ins_num) {
+		this.ins_num = ins_num;
 	}
 	public void setIns_name(String ins_name) {
 		this.ins_name = ins_name;

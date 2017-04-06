@@ -32,16 +32,16 @@ public class ClassController {
 		public void addClass(@RequestBody Class classObj) {
 			System.out.println("Class Desc recieved = " +classObj.cls_description);
 			System.out.println("Class Level recieved = " +classObj.cls_level);
-			System.out.println("Class INs recieved = " +classObj.instructor.getIns_number());
-			if(classObj.instructor.getIns_number() == 0){
+			System.out.println("Class INs recieved = " +classObj.instructor.getIns_num());
+			if(classObj.instructor.getIns_num() == 0){
 				//System.out.println("Hello");
 				List<Instructor> inst=instructorService.getAllInstructor();
 				if(inst.size()>0){
-					System.out.println(inst.get(0).getIns_number());
-					classObj.instructor.setIns_number(inst.get(0).getIns_number());
+					System.out.println(inst.get(0).getIns_num());
+					classObj.instructor.setIns_num(inst.get(0).getIns_num());
 				}
 			}
-			System.out.println("Class INs recieved = " +classObj.instructor.getIns_number());
+			System.out.println("Class INs recieved = " +classObj.instructor.getIns_num());
 			classService.addClass(classObj);
 		}
 	
