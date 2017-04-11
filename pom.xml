@@ -2,7 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.test.springtest</groupId>
-	<artifactId>org.test.springtest</artifactId>
+	<!--  <artifactId>org.test.springtest</artifactId>-->
+	<artifactId>gs-actuator-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MaruProject2</name>
 	<description>org.test.springtest</description>
@@ -26,6 +27,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-solr</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
 		<!-- Dependency for JPA support -->
 		<dependency>
